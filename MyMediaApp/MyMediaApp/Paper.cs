@@ -10,7 +10,7 @@ namespace MyMediaApp
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public PaperType type { get; set; }
+        public PaperType Type { get; set; }
         public string Author { get; set; }
     }
 }
