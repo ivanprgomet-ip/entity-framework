@@ -10,5 +10,7 @@ namespace MyMediaApp
         public int LengthMinutes{ get; set; }
         public Dictionary<string,string> Top3Actors { get; set; }
         public string Director { get; set;}
+
+        
     }
 }

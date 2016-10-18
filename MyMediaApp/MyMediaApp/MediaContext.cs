@@ -9,8 +9,8 @@ namespace MyMediaApp
 {
     class MediaContext:DbContext
     {
-        DbSet<Paper> Papers { get; set; }
-        DbSet<Movie> Movies{ get; set; }
-        DbSet<Book> Books{ get; set; }
+        public DbSet<Paper> Papers { get; set; }
+        public DbSet<Movie> Movies{ get; set; }
+        public DbSet<Book> Books{ get; set; }
     }
 }

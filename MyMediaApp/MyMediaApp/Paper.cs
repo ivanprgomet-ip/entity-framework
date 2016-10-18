@@ -9,8 +9,8 @@ namespace MyMediaApp
     internal class Paper
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public PaperType type { get; set; }
-        public string Genre { get; set; }
         public string Author { get; set; }
     }
 }
