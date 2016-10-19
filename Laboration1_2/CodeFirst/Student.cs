@@ -4,7 +4,7 @@ namespace CodeFirst
 {
     internal class Student
     {
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         public string StudentName { get; set; }
         public DateTime StudentBirthDate { get; set; }
     }

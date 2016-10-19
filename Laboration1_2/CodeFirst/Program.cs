@@ -12,6 +12,7 @@ namespace CodeFirst
         {
             using (var ctx = new SchoolContext())
             {
+                
                 Student student = new Student() { StudentName = "New st udent", StudentBirthDate = DateTime.Now.AddYears(-45) };
 
                 ctx.Students.Add(student);
