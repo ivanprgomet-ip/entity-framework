@@ -10,10 +10,13 @@ namespace CodeFirst
     {
         static void Main(string[] args)
         {
-            Student s1 = new Student();
-            Education e1 = new Education();
-            School sc1 = new School();
+            using (var ctx = new SchoolContext())
+            {
+                Student student = new Student() { StudentName = "New st udent", StudentBirthDate = DateTime.Now.AddYears(-45) };
 
+                ctx.Students.Add(student);
+                ctx.SaveChanges();
+            }
         }
     }
 }

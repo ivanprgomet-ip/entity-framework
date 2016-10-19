@@ -1,9 +1,11 @@
-﻿namespace CodeFirst
+﻿using System;
+
+namespace CodeFirst
 {
     internal class Student
     {
         public int Id { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        public string StudentName { get; set; }
+        public DateTime StudentBirthDate { get; set; }
     }
 }
