@@ -10,14 +10,26 @@ namespace CodeFirst
     {
         static void Main(string[] args)
         {
-            using (var ctx = new SchoolContext())
-            {
-                
-                Student student = new Student() { StudentName = "New st udent", StudentBirthDate = DateTime.Now.AddYears(-45) };
+            //using (var ctx = new SchoolContext())
+            //{
 
-                ctx.Students.Add(student);
-                ctx.SaveChanges();
-            }
+            //    Student student = new Student() { StudentName = "Ivan Prgomet", StudentBirthDate = DateTime.Now.AddYears(-24) };
+
+            //    ctx.Students.Add(student);
+            //    ctx.SaveChanges();
+            //}
+
+            SchoolContext context = new SchoolContext();
+            
+            Console.WriteLine(ReturnStudentWithStartLetter(context, "I"));
+
+        }
+        public static string ReturnStudentWithStartLetter(SchoolContext context, string letter)
+        {
+            var stud = context.Students.Where(s => s.StudentName.StartsWith("I") && s.StudentBirthDate.Year > 1990).FirstOrDefault();
+            if (stud == null)
+                return "no matching student found";
+            return stud.StudentName+" "+stud.StudentBirthDate.Year;
         }
     }
 }
