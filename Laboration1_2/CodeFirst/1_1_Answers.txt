@@ -1,0 +1,65 @@
+﻿1. Vad är Entity Framework?(tips: Microsofts korta definition på vad det är)
+	>> MSDN:s förklaring för entity framework lyder: 
+		The Entity Framework is a set of technologies that support the development 
+		of data-oriented software applications. The Entity Framework enables developers 
+		to work with data in the form of domain-specific objects and properties, 
+		such as customers and customer addresses, without having to concern themselves 
+		with the underlying database tables and columns where this data is stored. 
+		With the Entity Framework, developers can work at a higher level of abstraction 
+		when they deal with data, and can create and maintain data-oriented applications 
+		with less code than in traditional applications
+
+2. Vilka 3 sätt finns det för att komma igång och använda Entity Framework i ett .NET projekt? 
+	>> De 3 sätten för att komma igång och använda EF är:
+		(1) Code first
+		(2) Database first
+		(3) Model first
+
+3. Förklara vad de olika sätten innebär? 
+	>> De 3 olika sätten förklaras nedan: 
+		(1) Code first
+			In the Code First approach, you avoid working with visual model designer (EDMX) completely. You write your POCO classes first and then create database from these POCO classe
+		(2) Database first
+			When you generate EDMX from an existing database then it is a Database First approach
+		(3) Model first
+			In the Model First approach, you create Entities, relationships, and inheritance hierarchies directly on the design surface of EDMX and then generate database from your model.
+		
+4. Vad står CRUD för? 
+	>> Create, Read, Update, Delete
+
+5. Vad är O/RM (förklara) 
+	>> ORM stands for Object Relational Mapping. Object-relational mapping (ORM, O/RM, and O/R mapping) in computer software 
+	is a programming technique for converting data between incompatible type systems in relational databases and object-oriented 
+	programming languages. This creates, in effect, a "virtual object database" that can be used from within the programming language. 
+	There are both free and commercial packages available that perform object-relational mapping, although some programmers opt to create their own ORM tools.
+
+	It's good for abstracting the datastore (flat file / SQL / whatever) out in order to provide an interface that can be used in your code. 
+	For example, (in rails) instead of constructing SQL to find the first user in a users table, we could do this:
+	User.first
+	Which would return us an instance of our user model, with the attributes of the first user in the users table.
+	
+	
+	Entity Framework (EF) is an open source object-relational mapping (ORM) framework for ADO.NET, 
+	was a part of .NET Framework, but from Entity framework version 6 it is separated from .NET framework. 
+
+6. Vad är det för färg på din tröja/skjorta/t-shirt?
+	>> Grå?
+
+7. Vad har klassen som ärver från DBContext för funktion?
+	>> The primary class that is responsible for interacting with data as objects is System.Data.Entity.DbContext (often referred to as context). 
+	The context class manages the entity objects during run time, which includes populating objects with data from a database, 
+	change tracking, and persisting data to the database.  
+
+8. När vi skapat en model från en databas så får filerna specifika namn 
+	a. Vad får klassen som ärver från DBContext för namn?
+		>> [Classname]Context
+
+	b. Vad heter filen där våra klasser ligger?
+		>>	What classes? the ones that dont have any contact with the database (POCOEntities) or the ones that 
+		know about the database (DataModels)
+
+	c. Vilken information ligger i App.config filen? 
+		This file is on root-level in the project, and saves whats needed to connect to the SQL server
+
+9. Det finns 2 språk/syntaxer som vanligtvis används för att ställa frågor till databasen. Vad heter dem?
+	LINQ and SQL
