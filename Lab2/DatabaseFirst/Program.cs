@@ -16,10 +16,11 @@ namespace DatabaseFirst
             {
                 Console.WriteLine("______________");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Authors and Home telephone numbers: ");
+                Console.WriteLine("Authors, telephone numbers and accepted payment method: ");
                 Console.ResetColor();
                 Console.WriteLine(author.FirstName + " " + author.LastName);
                 Console.WriteLine(author.HomeTel != string.Empty ? "[not Set]" : author.HomeTel);
+                Console.WriteLine(author.PaymentMethod);
                 Console.WriteLine("______________");
             }
 

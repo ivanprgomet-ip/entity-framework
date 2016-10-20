@@ -72,8 +72,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BooksDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PaymentMethods.cs">
+      <DependentUpon>BooksDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Store.cs">
+      <DependentUpon>BooksDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Title.cs">
       <DependentUpon>BooksDataModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +93,7 @@
     <None Include="BooksDataModel.edmx.diagram">
       <DependentUpon>BooksDataModel.edmx</DependentUpon>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

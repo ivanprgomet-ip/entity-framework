@@ -23,6 +23,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="HomeTel" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Stores">
           <Key>
@@ -97,6 +98,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Titles" Relationship="Self.AuthorISBN" FromRole="Authors" ToRole="Titles" />
           <Property Name="HomeTel" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PaymentMethod" Type="BooksModel.PaymentMethods" Nullable="false" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -129,6 +131,11 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="StoreLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StoreTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EnumType Name="PaymentMethods" >
+          <Member Name="Cash" Value="0" />
+          <Member Name="Bank" Value="1" />
+          <Member Name="Card" Value="2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -138,6 +145,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <EntitySetMapping Name="Authors">
             <EntityTypeMapping TypeName="BooksModel.Author">
               <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
                 <ScalarProperty Name="HomeTel" ColumnName="HomeTel" />
                 <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
