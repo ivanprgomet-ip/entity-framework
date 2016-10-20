@@ -98,7 +98,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Titles" Relationship="Self.AuthorISBN" FromRole="Authors" ToRole="Titles" />
           <Property Name="HomeTel" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="PaymentMethod" Type="BooksModel.PaymentMethods" Nullable="false" />
+          <Property Name="PaymentMethod" Type="BooksModel.PayMethods" Nullable="false" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -136,6 +136,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Member Name="Bank" Value="1" />
           <Member Name="Card" Value="2" />
         </EnumType>
+        <EnumType Name="PayMethods" a:ExternalTypeName="DatabaseFirst.MyEnums.PayMethods" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -24,7 +24,7 @@ namespace DatabaseFirst
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string HomeTel { get; set; }
-        public PaymentMethods PaymentMethod { get; set; }
+        public DatabaseFirst.MyEnums.PayMethods PaymentMethod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Title> Titles { get; set; }
