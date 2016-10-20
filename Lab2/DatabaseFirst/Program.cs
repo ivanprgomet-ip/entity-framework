@@ -12,16 +12,14 @@ namespace DatabaseFirst
         {
             BooksEntities be = new BooksEntities();
 
-            //foreach (var author in be.Authors)
-            //{
-            //    Console.WriteLine("______________");
-            //    Console.WriteLine("Titles by "+author.FirstName+" "+author.LastName);
-            //    foreach (var title in author.Titles)
-            //    {
-            //        Console.WriteLine(title.Title1+" "+title.EditionNumber+" "+title.ISBN+" "+title.Copyright);
-            //    }
-            //    Console.WriteLine("______________");
-            //}
+            foreach (var author in be.Authors)
+            {
+                Console.WriteLine("______________");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Authors and Home telephone numbers: " + author.FirstName + " " + author.LastName+" "+author.HomeTel);
+                Console.ResetColor();
+                Console.WriteLine("______________");
+            }
 
             foreach (var title in be.Titles)
             {
