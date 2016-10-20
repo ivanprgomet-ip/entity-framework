@@ -16,8 +16,10 @@ namespace DatabaseFirst
             {
                 Console.WriteLine("______________");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Authors and Home telephone numbers: " + author.FirstName + " " + author.LastName+" "+author.HomeTel);
+                Console.WriteLine("Authors and Home telephone numbers: ");
                 Console.ResetColor();
+                Console.WriteLine(author.FirstName + " " + author.LastName);
+                Console.WriteLine(author.HomeTel != string.Empty ? "[not Set]" : author.HomeTel);
                 Console.WriteLine("______________");
             }
 
@@ -25,11 +27,11 @@ namespace DatabaseFirst
             {
                 Console.WriteLine("______________");
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("'"+title.Title1 +"' by: ");
+                Console.WriteLine("'" + title.Title1 + "' by: ");
                 Console.ResetColor();
                 foreach (var author in title.Authors)
                 {
-                    Console.WriteLine(author.FirstName+" "+author.LastName);
+                    Console.WriteLine(author.FirstName + " " + author.LastName);
                 }
                 Console.WriteLine("______________");
             }

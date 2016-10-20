@@ -22,7 +22,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="HomeTel" Type="int" />
+          <Property Name="HomeTel" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Titles">
           <Key>
@@ -87,7 +87,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Titles" Relationship="Self.AuthorISBN" FromRole="Authors" ToRole="Titles" />
-          <Property Name="HomeTel" Type="Int32" />
+          <Property Name="HomeTel" Type="String" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
