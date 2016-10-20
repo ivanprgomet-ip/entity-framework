@@ -27,5 +27,6 @@ namespace DatabaseFirst
     
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Title> Titles { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
     }
 }

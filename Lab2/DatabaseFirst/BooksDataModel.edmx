@@ -24,6 +24,14 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="HomeTel" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="StoreLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="StoreTel" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Titles">
           <Key>
             <PropertyRef Name="ISBN" />
@@ -59,6 +67,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
         </Association>
         <EntityContainer Name="BooksModelStoreContainer">
           <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorISBN" EntityType="Self.AuthorISBN" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -87,7 +96,7 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Titles" Relationship="Self.AuthorISBN" FromRole="Authors" ToRole="Titles" />
-          <Property Name="HomeTel" Type="String" />
+          <Property Name="HomeTel" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -110,7 +119,16 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
             <End Role="Authors" EntitySet="Authors" />
             <End Role="Titles" EntitySet="Titles" />
           </AssociationSet>
+          <EntitySet Name="Stores" EntityType="BooksModel.Store" />
         </EntityContainer>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="Int32" Nullable="false" />
+          <Property Name="StoreLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StoreTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -145,6 +163,15 @@ warning 6002: The table/view 'Books.dbo.AuthorISBN' does not have a primary key 
               <ScalarProperty Name="ISBN" ColumnName="ISBN" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="BooksModel.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="StoreTel" ColumnName="StoreTel" />
+                <ScalarProperty Name="StoreLocation" ColumnName="StoreLocation" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
