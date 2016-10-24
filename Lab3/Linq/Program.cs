@@ -108,6 +108,7 @@ namespace Linq
                 Console.WriteLine("3. lista alla anställda för avdelning... ");
                 Console.WriteLine("4. fritext sökning");
                 Console.WriteLine("5. lista anställda som varit anställda mindre än 1 år");
+                Console.WriteLine("6. lista anställd från någon avdelning");
                 string choice = Console.ReadLine();
 
 
@@ -215,6 +216,13 @@ namespace Linq
                         }
                         Console.ReadKey();
                         Console.Clear();
+                        break;
+                    case "6":
+                        Random rnd = new Random();
+                        int DepartmentCount = Enum.GetNames(typeof(Department)).Length;
+                        int rndDepIndex = rnd.Next(1, DepartmentCount)+1;
+                        Employee first = emps.Where(e => e.EmpDepartment == (Department)rndDepIndex).First();
+                        Console.WriteLine(first.Firstname + " " + first.Lastname + " " + first.EmpDepartment);
                         break;
                     default:
                         break;
