@@ -98,7 +98,7 @@ namespace Linq
                 new Employee() {Id=1,Firstname="Bane",Lastname="Banes",HireDate=new DateTime(2015,09,10), EmpDepartment=Department.InformationTechnology,Age=26},
                 new Employee() {Id=1,Firstname="Wayne",Lastname="Enterprise",HireDate=new DateTime(2015,03,10), EmpDepartment=Department.InformationTechnology,Age=40},
                 new Employee() {Id=1,Firstname="Garret",Lastname="Green",HireDate=new DateTime(2016,09,10), EmpDepartment=Department.Administration,Age=42},
-                new Employee() {Id=1,Firstname="Louisa",Lastname="Stevens",HireDate=new DateTime(2016,05,09), EmpDepartment=Department.Marketing,Age=29},
+                new Employee() {Id=1,Firstname="Louisa",Lastname="Stevens",HireDate=new DateTime(2017,05,09), EmpDepartment=Department.Marketing,Age=29},
             };
 
             while (true)
@@ -204,6 +204,17 @@ namespace Linq
                         break;
                     case "5":
                         //code for employees that have been hired less than a year
+                        DateTime today = DateTime.Today;
+                        List<Employee> hiredLessThanAYear = emps.Where(e => (today - e.HireDate).Days < 365).ToList();
+                        foreach (var emp in hiredLessThanAYear)
+                        {
+                            if(emp.HireDate>today)
+                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " cant be hired before being hired (hiredate? "+ emp.HireDate.ToShortDateString()+")");
+                            else
+                                Console.WriteLine(emp.Firstname + " " + emp.Lastname +" "+ emp.HireDate.ToShortDateString());
+                        }
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     default:
                         break;
