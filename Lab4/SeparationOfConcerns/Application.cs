@@ -6,21 +6,18 @@ using System.Threading.Tasks;
 
 namespace SeparationOfConcerns
 {
+    /// <summary>
+    /// all the UI for the application. no logic zone.
+    /// </summary>
     class Application
     {
-        List<Employee> emps = new List<Employee>()
-            {
-                new Employee() {Id=1,Firstname="Ivan",Lastname="Prgomet",HireDate=new DateTime(2016,03,20), EmpDepartment=Department.InformationTechnology,Age=24},
-                new Employee() {Id=1,Firstname="Doug",Lastname="Floyers",HireDate=new DateTime(2015,10,10), EmpDepartment=Department.Economics,Age=24},
-                new Employee() {Id=1,Firstname="Marlon",Lastname="Reeds",HireDate=new DateTime(2015,09,10), EmpDepartment=Department.Support,Age=29},
-                new Employee() {Id=1,Firstname="Mark",Lastname="Sergej",HireDate=new DateTime(2015,07,10), EmpDepartment=Department.Support,Age=20},
-                new Employee() {Id=1,Firstname="Cindy",Lastname="Logans",HireDate=new DateTime(2016,03,10), EmpDepartment=Department.Administration,Age=34},
-                new Employee() {Id=1,Firstname="Ben",Lastname="Afleck",HireDate=new DateTime(2015,09,03), EmpDepartment=Department.Administration,Age=33},
-                new Employee() {Id=1,Firstname="Bane",Lastname="Banes",HireDate=new DateTime(2015,09,10), EmpDepartment=Department.InformationTechnology,Age=26},
-                new Employee() {Id=1,Firstname="Wayne",Lastname="Enterprise",HireDate=new DateTime(2015,03,10), EmpDepartment=Department.InformationTechnology,Age=40},
-                new Employee() {Id=1,Firstname="Garret",Lastname="Green",HireDate=new DateTime(2016,09,10), EmpDepartment=Department.Administration,Age=42},
-                new Employee() {Id=1,Firstname="Louisa",Lastname="Stevens",HireDate=new DateTime(2017,05,09), EmpDepartment=Department.Marketing,Age=29},
-            };
+        ListHelper db { get; set; }
+        public Application()
+        {
+            db = new ListHelper();
+        }
+
+      
 
         public bool isRunning = true;
 
@@ -34,12 +31,11 @@ namespace SeparationOfConcerns
             Console.WriteLine("6. lista anställd från någon avdelning");
             string choice = Console.ReadLine();
 
-
-
             switch (choice)
             {
                 case "1":
-                    foreach (var emp in emps.OrderBy(e => e.Lastname))
+                    List<Employee> orderedByLastname = db.ReturnOrderedEmployeesLastname();
+                    foreach (var emp in orderedByLastname)//iterate over ordered list
                     {
                         Console.WriteLine(emp.Firstname + " " + emp.Lastname);
                     }
@@ -47,7 +43,8 @@ namespace SeparationOfConcerns
                     Console.Clear();
                     break;
                 case "2":
-                    foreach (var emp in emps.OrderBy(e => e.Firstname))
+                    List<Employee> orderedByFirstname = db.ReturnOrderedEmployeesFirstname();
+                    foreach (var emp in orderedByFirstname)//iterate over ordered list
                     {
                         Console.WriteLine(emp.Firstname + " " + emp.Lastname);
                     }
