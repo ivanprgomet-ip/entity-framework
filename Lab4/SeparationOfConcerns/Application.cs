@@ -59,91 +59,52 @@ namespace SeparationOfConcerns
                     Console.WriteLine("5. Economics");
                     int dep = Convert.ToInt32(Console.ReadLine());
 
-                    #region swithc
-                    switch (dep)
+                    //return employees with specific department
+                    List<Employee> employees = db.ReturnEmployeesFromDepartment(dep);
+                    foreach (var emp in employees)
                     {
-                        case (int)Department.Administration:
-                            foreach (var emp in emps.Where(e => e.EmpDepartment == Department.Administration))
-                            {
-                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
-                            }
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case (int)Department.InformationTechnology:
-                            foreach (var emp in emps.Where(e => e.EmpDepartment == Department.InformationTechnology))
-                            {
-                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
-                            }
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case (int)Department.Support:
-                            foreach (var emp in emps.Where(e => e.EmpDepartment == Department.Support))
-                            {
-                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
-                            }
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case (int)Department.Marketing:
-                            foreach (var emp in emps.Where(e => e.EmpDepartment == Department.Marketing))
-                            {
-                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
-                            }
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case (int)Department.Economics:
-                            foreach (var emp in emps.Where(e => e.EmpDepartment == Department.Economics))
-                            {
-                                Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
-                            }
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        default:
-                            break;
-                    }
-                    #endregion
-                    break;
-                case "4":
-                    Console.WriteLine("Ange söktext >> ");
-                    string freeSearch = Console.ReadLine();
-
-                    List<Employee> freeSearched = emps.Where(e => e.Firstname.StartsWith(freeSearch[0].ToString())
-                                                                || e.Firstname.Contains(freeSearch)
-                                                                || e.Lastname.StartsWith(freeSearch[0].ToString())
-                                                                || e.Lastname.Contains(freeSearch)).ToList();
-
-                    foreach (var emp in freeSearched)
-                    {
-                        Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.Age + " " + emp.HireDate.ToShortDateString());
+                        Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.EmpDepartment);
                     }
                     Console.ReadKey();
                     Console.Clear();
                     break;
-                case "5":
-                    //code for employees that have been hired less than a year
-                    DateTime today = DateTime.Today;
-                    List<Employee> hiredLessThanAYear = emps.Where(e => (today - e.HireDate).Days < 365).ToList();
-                    foreach (var emp in hiredLessThanAYear)
-                    {
-                        if (emp.HireDate > today)
-                            Console.WriteLine(emp.Firstname + " " + emp.Lastname + " cant be hired before being hired (hiredate? " + emp.HireDate.ToShortDateString() + ")");
-                        else
-                            Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.HireDate.ToShortDateString());
-                    }
-                    Console.ReadKey();
-                    Console.Clear();
-                    break;
-                case "6":
-                    Random rnd = new Random();
-                    int DepartmentCount = Enum.GetNames(typeof(Department)).Length;
-                    int rndDepIndex = rnd.Next(1, DepartmentCount) + 1;
-                    Employee first = emps.Where(e => e.EmpDepartment == (Department)rndDepIndex).First();
-                    Console.WriteLine(first.Firstname + " " + first.Lastname + " " + first.EmpDepartment);
-                    break;
+                //case "4":
+                //    Console.WriteLine("Ange söktext >> ");
+                //    string freeSearch = Console.ReadLine();
+
+                //    List<Employee> freeSearched = emps.Where(e => e.Firstname.StartsWith(freeSearch[0].ToString())
+                //                                                || e.Firstname.Contains(freeSearch)
+                //                                                || e.Lastname.StartsWith(freeSearch[0].ToString())
+                //                                                || e.Lastname.Contains(freeSearch)).ToList();
+
+                //    foreach (var emp in freeSearched)
+                //    {
+                //        Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.Age + " " + emp.HireDate.ToShortDateString());
+                //    }
+                //    Console.ReadKey();
+                //    Console.Clear();
+                //    break;
+                //case "5":
+                //    //code for employees that have been hired less than a year
+                //    DateTime today = DateTime.Today;
+                //    List<Employee> hiredLessThanAYear = emps.Where(e => (today - e.HireDate).Days < 365).ToList();
+                //    foreach (var emp in hiredLessThanAYear)
+                //    {
+                //        if (emp.HireDate > today)
+                //            Console.WriteLine(emp.Firstname + " " + emp.Lastname + " cant be hired before being hired (hiredate? " + emp.HireDate.ToShortDateString() + ")");
+                //        else
+                //            Console.WriteLine(emp.Firstname + " " + emp.Lastname + " " + emp.HireDate.ToShortDateString());
+                //    }
+                //    Console.ReadKey();
+                //    Console.Clear();
+                //    break;
+                //case "6":
+                //    Random rnd = new Random();
+                //    int DepartmentCount = Enum.GetNames(typeof(Department)).Length;
+                //    int rndDepIndex = rnd.Next(1, DepartmentCount) + 1;
+                //    Employee first = emps.Where(e => e.EmpDepartment == (Department)rndDepIndex).First();
+                //    Console.WriteLine(first.Firstname + " " + first.Lastname + " " + first.EmpDepartment);
+                //    break;
                 default:
                     Console.WriteLine("App is closing...");
                     isRunning = false;

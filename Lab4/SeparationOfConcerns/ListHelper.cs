@@ -31,7 +31,25 @@ namespace SeparationOfConcerns
             };
         }
 
-        public List<Employee> ReturnOrderedEmployeesLastname()
+        internal List<Employee> ReturnEmployeesFromDepartment(int dep)
+        {
+            switch (dep)
+            {
+                case (int)Department.Administration:
+                    return emps.Where(e => e.EmpDepartment == Department.Administration).ToList();
+                case (int)Department.InformationTechnology:
+                    return emps.Where(e => e.EmpDepartment == Department.InformationTechnology).ToList();
+                case (int)Department.Support:
+                    return emps.Where(e => e.EmpDepartment == Department.Support).ToList();
+                case (int)Department.Marketing:
+                    return emps.Where(e => e.EmpDepartment == Department.Marketing).ToList();
+                case (int)Department.Economics:
+                    return emps.Where(e => e.EmpDepartment == Department.Economics).ToList();
+                default:
+                    return null;
+            }
+        }
+        internal List<Employee> ReturnOrderedEmployeesLastname()
         {
             //EmployeeSortByLastname customerSortByLastname
             //List<Employee> ordered = emps = new List<Employee>();
@@ -40,7 +58,7 @@ namespace SeparationOfConcerns
             List<Employee> ordered = emps.OrderBy(e => e.Lastname).ToList();//order by lastname and place in new list
             return ordered;
         }
-        public List<Employee> ReturnOrderedEmployeesFirstname()
+        internal List<Employee> ReturnOrderedEmployeesFirstname()
         {
             List<Employee> ordered = emps.OrderBy(e => e.Firstname).ToList();//order by lastname and place in new list
             return ordered;
