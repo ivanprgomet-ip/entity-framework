@@ -227,7 +227,6 @@ namespace Linq
                     default:
                         break;
                 }
-
             }
 
         }
