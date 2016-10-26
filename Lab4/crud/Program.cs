@@ -17,13 +17,10 @@ namespace crud
         {
            
             UI ui = new UI();
-            //ui.AddAuthor();
-            ui.ListAllAuthors();
-            ui.UpdateAuthorAge();
-            //ui.RemoveAuthor();
-            //ui.UpdateAuthor();
-            //ui.SearchForAuthorByID();
-            //ui.FindAuthorStartingWith();
+            while (ui.Run())
+            {
+                ui.Run();
+            }
         }
     }
 

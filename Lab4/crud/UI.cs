@@ -186,5 +186,53 @@ namespace crud
             }
             Console.ReadKey();
         }
+
+        public bool Run()
+        {
+            Console.WriteLine("[1] List all authors");
+            Console.WriteLine("[2] Search for author");
+            Console.WriteLine("[3] Search for an author by ID");
+            Console.WriteLine("[4] Add an author");
+            Console.WriteLine("[5] Update an existing author name");
+            Console.WriteLine("[6] Update an existing author age");
+            Console.WriteLine("[7] Remove an author");
+            Console.WriteLine("[e] Exit application");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ListAllAuthors();
+                    break;
+                case "2":
+                    FindAuthorStartingWith();
+                    break;
+                case "3":
+                    SearchForAuthorByID();
+                    break;
+                case "4":
+                    AddAuthor();
+                    break;
+                case "5":
+                    UpdateAuthorName();
+                    break;
+                case "6":
+                    UpdateAuthorAge();
+                    break;
+                case "7":
+                    RemoveAuthor();
+                    break;
+                case "e":
+                    return false;//only way to exit application
+                default:
+                    Console.WriteLine("Enter legit command");
+                    Console.ReadKey();
+                    return true;
+            }
+            return true;
+
+
+
+        }
     }
 }
