@@ -11,7 +11,7 @@ namespace crud
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Title
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,6 +19,7 @@ namespace crud
         {
             this.Authors = new HashSet<Author>();
         }
+    
         public string ISBN { get; set; }
         public string Title1 { get; set; }
         public Nullable<int> EditionNumber { get; set; }

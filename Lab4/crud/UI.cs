@@ -15,7 +15,7 @@ namespace crud
             {
                 foreach (var author in context.Authors)//why is Authors null? because you were using the wrong context class
                 {
-                    Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName);
+                    Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName+" age: "+author.Age);
                 }
             }
             Console.ReadKey();
@@ -82,7 +82,7 @@ namespace crud
                 Console.ResetColor();
             }
         }
-        public void UpdateAuthor()
+        public void UpdateAuthorName()
         {
             char[] delimiters = new char[] { ' ', ',' };
             string[] tokens;
@@ -138,6 +138,32 @@ namespace crud
                 }
             } 
             #endregion
+        }
+        public void UpdateAuthorAge()
+        {
+            Console.Write("Enter ID of author to update age >> ");
+            int searchID = int.Parse(Console.ReadLine());
+
+            using (BooksDB context = new BooksDB())
+            {
+                Author matchingAutor = context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
+                if (matchingAutor == null)
+                    Console.WriteLine("No matching author with that ID found");
+                else
+                {
+                    Console.Write("Enter new age >> ");
+                    int newAge = int.Parse(Console.ReadLine());
+
+                    //CRUD
+                    Author ToBeUpdated = context.Authors.Where(a => a.AuthorID.Equals(searchID)).First();
+                    ToBeUpdated.Age = newAge;
+                    context.Database.Log = Console.WriteLine;
+                    context.SaveChanges();
+
+                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to "+newAge);
+                }
+            }
+            Console.ReadKey();
         }
         public void RemoveAuthor()
         {

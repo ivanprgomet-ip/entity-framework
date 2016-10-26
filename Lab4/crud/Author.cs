@@ -25,6 +25,7 @@ namespace crud
         public string LastName { get; set; }
         public string HomeTel { get; set; }
         public int PaymentMethod { get; set; }
+        public Nullable<int> Age { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Title> Titles { get; set; }
