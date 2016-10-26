@@ -82,5 +82,62 @@ namespace crud
                 Console.ResetColor();
             }
         }
+        public void UpdateAuthor()
+        {
+            char[] delimiters = new char[] { ' ', ',' };
+            string[] tokens;
+
+            //make sure the user inputs a fullname of firstname and lastname
+            #region make sure user inputs fullname in one line
+            while (true)
+            {
+                Console.Write("Enter author fullname >> ");
+                string fullname = Console.ReadLine();
+
+                tokens = fullname.Split(delimiters);//array will contain the firstname and lastname split by space or ,
+
+                if (tokens.Length > 1)
+                    break;
+                else
+                    Console.WriteLine("Fullname not entered...");
+            }
+            #endregion
+
+            string firstname = tokens[0];
+            string lastname = tokens[1];
+
+            #region CRUD
+            using (BooksDB ctx = new BooksDB())
+            {
+                //returns how many authors match the user input
+                int matchingAuthors = ctx.Authors.Where(a => a.FirstName.Equals(firstname) && a.LastName.Equals(lastname)).Count();
+
+                if (matchingAuthors > 1)
+                    Console.WriteLine(matchingAuthors + " matching authors found");
+                else if (matchingAuthors == 1)
+                {
+                    Console.WriteLine(matchingAuthors + " matching author found");
+                    Console.Write("Enter new firstname >> ");
+                    string newFirstname = Console.ReadLine();
+                    Console.Write("Enter new lastname >> ");
+                    string newLastname = Console.ReadLine();
+
+                    //CRUD OPERATION FOR UPDATING 
+                    Author UpdateMe = (from a in ctx.Authors
+                                       where a.FirstName.Equals(firstname)
+                                       && a.LastName.Equals(lastname)
+                                       select a).First();
+                    UpdateMe.FirstName = newFirstname;
+                    UpdateMe.LastName = newLastname;
+                    ctx.Database.Log = Console.WriteLine;
+                    ctx.SaveChanges();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Author successfully updated");
+                    Console.ResetColor();
+                }
+            } 
+            #endregion
+        }
     }
 }

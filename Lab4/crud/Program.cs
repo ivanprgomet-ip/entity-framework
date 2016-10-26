@@ -17,7 +17,8 @@ namespace crud
         {
            
             UI ui = new UI();
-            ui.AddAuthor();
+            //ui.AddAuthor();
+            ui.UpdateAuthor();
             //ui.SearchForAuthorByID();
             //ui.FindAuthorStartingWith();
             ui.ListAllAuthors();
