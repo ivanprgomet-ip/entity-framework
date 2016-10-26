@@ -15,7 +15,7 @@ namespace crud
             {
                 foreach (var author in context.Authors)//why is Authors null? because you were using the wrong context class
                 {
-                    Console.WriteLine(author.FirstName + " " + author.LastName);
+                    Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName);
                 }
             }
             Console.ReadKey();
@@ -138,6 +138,27 @@ namespace crud
                 }
             } 
             #endregion
+        }
+        public void RemoveAuthor()
+        {
+            Console.WriteLine("Enter ID of author to remove: ");
+            int searchID = int.Parse(Console.ReadLine());
+            using (BooksDB context = new BooksDB())
+            {
+                Author matchingAutor = context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
+                if (matchingAutor == null)
+                    Console.WriteLine("No matching author with that ID found");
+                else
+                {
+                    //CRUD
+                    context.Authors.Remove(context.Authors.Where(a => a.AuthorID.Equals(searchID)).First());//remove author with mathcing ID
+                    context.Database.Log = Console.WriteLine;
+                    context.SaveChanges();
+
+                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName +" removed from database");
+                }
+            }
+            Console.ReadKey();
         }
     }
 }

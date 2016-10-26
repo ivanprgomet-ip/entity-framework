@@ -18,10 +18,11 @@ namespace crud
            
             UI ui = new UI();
             //ui.AddAuthor();
-            ui.UpdateAuthor();
+            ui.ListAllAuthors();
+            ui.RemoveAuthor();
+            //ui.UpdateAuthor();
             //ui.SearchForAuthorByID();
             //ui.FindAuthorStartingWith();
-            ui.ListAllAuthors();
         }
     }
 
