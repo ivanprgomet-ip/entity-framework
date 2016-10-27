@@ -117,15 +117,14 @@ namespace crud
                 string newLastname = Console.ReadLine();
 
                 //CRUD OPERATION FOR UPDATING 
-                using (BooksDB ctx = new BooksDB())
-                {
-                    Author Update = BLL.GetAuthorToUpdateName(firstname, lastname, ctx);
-                    bool updateSucceeded = BLL.UpdateAuthorName(Update, newFirstname, newLastname, ctx);
 
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(updateSucceeded ? "Author successfully updated" : "Update failed");
-                    Console.ResetColor();
-                }
+                Author Update = BLL.GetAuthorToUpdateName(firstname, lastname);
+                bool updateSucceeded = BLL.UpdateAuthorName(Update, newFirstname, newLastname);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(updateSucceeded ? "Author successfully updated" : "Update failed");
+                Console.ResetColor();
+
             }
         }
         public void UpdateAuthorAge()

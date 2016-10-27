@@ -62,22 +62,22 @@ namespace crud
             return ReturnAuthors().Where(a => a.FirstName.Equals(names[0]) && a.LastName.Equals(names[1])).Count();
         }
 
-        internal static Author GetAuthorToUpdateName(string firstname, string lastname, BooksDB ctx)
+        internal static Author GetAuthorToUpdateName(string firstname, string lastname)
         {
             //returns the author which is to be updated
-            return (from a in ctx.Authors
+            return (from a in _context.Authors
                     where a.FirstName.Equals(firstname)
                     && a.LastName.Equals(lastname)
                     select a).First();
         }
-        internal static bool UpdateAuthorName(Author update, string newfirstname, string newlastname, BooksDB ctx)
+        internal static bool UpdateAuthorName(Author update, string newfirstname, string newlastname)
         {
             try
             {
                 update.FirstName = newfirstname;
                 update.LastName = newlastname;
-                ctx.Database.Log = Console.WriteLine;
-                ctx.SaveChanges();
+                _context.Database.Log = Console.WriteLine;
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception)
