@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace crud
 {
+    /// <summary>
+    /// contains the presentation layer. gets data from the 
+    /// business layer logic class.
+    /// </summary>
     class UI
     {
         public void ListAllAuthors()
         {
             using (BooksDB context = new BooksDB())
             {
-                foreach (var author in context.Authors)//why is Authors null? because you were using the wrong context class
+                List<Author> authors = BLL.ReturnAuthors();
+                foreach (var author in authors)
                 {
                     Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName+" age: "+author.Age);
                 }
@@ -21,19 +26,19 @@ namespace crud
         }
         public void FindAuthorStartingWith()
         {
-            Console.WriteLine("Search for author (firstname/lastname starts with): ");
+            Console.Write("enter starting letters >> ");
             string searchString = Console.ReadLine();
-            using (BooksDB context = new BooksDB())
+
+            List<Author> authors = BLL.ReturnAuthors();
+            List<Author> matchingAutors = BLL.ReturnMatchingAuthorsSearchString(searchString);
+               
+            if (matchingAutors.Count == 0)
+                Console.WriteLine("No matching authors were found");
+            else
             {
-                List<Author> matchingAutors = context.Authors.Where(a => a.FirstName.StartsWith(searchString) || a.LastName.StartsWith(searchString)).ToList();
-                if (matchingAutors.Count == 0)
-                    Console.WriteLine("No matching authors were found");
-                else
+                foreach (var author in matchingAutors)
                 {
-                    foreach (var author in matchingAutors)
-                    {
-                        Console.WriteLine(author.FirstName + " " + author.LastName);
-                    }
+                    Console.WriteLine(author.FirstName + " " + author.LastName);
                 }
             }
         }
@@ -41,16 +46,16 @@ namespace crud
         {
             Console.WriteLine("Enter ID: ");
             int searchID = int.Parse(Console.ReadLine());
-            using (BooksDB context = new BooksDB())
+
+            Author matchingAuthor = BLL.ReturnMatchingAuthorID(searchID);
+
+            if (matchingAuthor == null)
+                Console.WriteLine("No matching author found");
+            else
             {
-                Author matchingAutor = context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
-                if (matchingAutor == null)
-                    Console.WriteLine("No matching author found");
-                else
-                {
-                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName);
-                }
+                Console.WriteLine(matchingAuthor.FirstName + " " + matchingAuthor.LastName);
             }
+       
         }
         public void AddAuthor()
         {
@@ -68,16 +73,12 @@ namespace crud
                 HomeTel = phone,
                 PaymentMethod = 0,
             };
-            using (BooksDB context = new BooksDB())
-            {
-                context.Authors.Add(author);
-                context.Database.Log = Console.WriteLine;
-                context.SaveChanges();
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Author successfylly added to database");
-                Console.ResetColor();
-            }
+            bool authorSuccessfullyAdded = BLL.AddAuthor(author);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(authorSuccessfullyAdded? "Author successfylly added to database":"Something went wront");
+            Console.ResetColor();
         }
         public void UpdateAuthorName()
         {
@@ -185,7 +186,7 @@ namespace crud
         public bool Run()
         {
             Console.WriteLine("[1] List all authors");
-            Console.WriteLine("[2] Search for author");
+            Console.WriteLine("[2] Search for author (firstname/lastname starts with): ");
             Console.WriteLine("[3] Search for an author by ID");
             Console.WriteLine("[4] Add an author");
             Console.WriteLine("[5] Update an existing author name");

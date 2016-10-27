@@ -10,9 +10,19 @@
 namespace crud
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    /// <summary>
+    /// data access layer. communicates with the bussuness
+    /// layer logic which sends logical info to the presentation
+    /// layer (UI).
+    /// 
+    /// What is the DbContext? >> The primary class that is responsible for interacting 
+    /// with data as objects is System.Data.Entity.DbContext (often referred to as context). 
+    /// The context class manages the entity objects during run time, which includes populating 
+    /// objects with data from a database, change tracking, and persisting data to the database
+    /// </summary>
     public partial class BooksDB : DbContext
     {
         public BooksDB()
@@ -24,7 +34,7 @@ namespace crud
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Title> Titles { get; set; }
