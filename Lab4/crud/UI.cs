@@ -18,11 +18,10 @@ namespace crud
                     Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName+" age: "+author.Age);
                 }
             }
-            Console.ReadKey();
         }
         public void FindAuthorStartingWith()
         {
-            Console.WriteLine("Search for author: ");
+            Console.WriteLine("Search for author (firstname/lastname starts with): ");
             string searchString = Console.ReadLine();
             using (BooksDB context = new BooksDB())
             {
@@ -37,7 +36,6 @@ namespace crud
                     }
                 }
             }
-            Console.ReadKey();
         }
         public void SearchForAuthorByID()
         {
@@ -53,7 +51,6 @@ namespace crud
                     Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName);
                 }
             }
-            Console.ReadKey();
         }
         public void AddAuthor()
         {
@@ -163,7 +160,6 @@ namespace crud
                     Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to "+newAge);
                 }
             }
-            Console.ReadKey();
         }
         public void RemoveAuthor()
         {
@@ -184,7 +180,6 @@ namespace crud
                     Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName +" removed from database");
                 }
             }
-            Console.ReadKey();
         }
 
         public bool Run()
@@ -203,24 +198,31 @@ namespace crud
             {
                 case "1":
                     ListAllAuthors();
+                    Console.ReadKey();
                     break;
                 case "2":
                     FindAuthorStartingWith();
+                    Console.ReadKey();
                     break;
                 case "3":
                     SearchForAuthorByID();
+                    Console.ReadKey();
                     break;
                 case "4":
                     AddAuthor();
+                    Console.ReadKey();
                     break;
                 case "5":
                     UpdateAuthorName();
+                    Console.ReadKey();
                     break;
                 case "6":
                     UpdateAuthorAge();
+                    Console.ReadKey();
                     break;
                 case "7":
                     RemoveAuthor();
+                    Console.ReadKey();
                     break;
                 case "e":
                     return false;//only way to exit application
