@@ -193,39 +193,51 @@ namespace crud
             Console.WriteLine("[6] Update an existing author age");
             Console.WriteLine("[7] Remove an author");
             Console.WriteLine("[e] Exit application");
-            string choice = Console.ReadLine();
+            //string choice = Console.ReadLine();
 
-            switch (choice)
+            ConsoleKeyInfo pressed = Console.ReadKey(true);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(pressed.KeyChar);
+            Console.ResetColor();
+
+            switch (pressed.Key)
             {
-                case "1":
+                case ConsoleKey.D1:
                     ListAllAuthors();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "2":
+                case ConsoleKey.D2:
                     FindAuthorStartingWith();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "3":
+                case ConsoleKey.D3:
                     SearchForAuthorByID();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "4":
+                case ConsoleKey.D4:
                     AddAuthor();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "5":
+                case ConsoleKey.D5:
                     UpdateAuthorName();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "6":
+                case ConsoleKey.D6:
                     UpdateAuthorAge();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "7":
+                case ConsoleKey.D7:
                     RemoveAuthor();
                     Console.ReadKey();
+                    Console.Clear();
                     break;
-                case "e":
+                case ConsoleKey.E:
                     return false;//only way to exit application
                 default:
                     Console.WriteLine("Enter legit command");
