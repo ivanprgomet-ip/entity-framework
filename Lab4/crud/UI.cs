@@ -20,7 +20,7 @@ namespace crud
                 List<Author> authors = BLL.ReturnAuthors();
                 foreach (var author in authors)
                 {
-                    Console.WriteLine(author.AuthorID+" "+ author.FirstName + " " + author.LastName+" age: "+author.Age);
+                    Console.WriteLine(author.AuthorID + " " + author.FirstName + " " + author.LastName + " age: " + author.Age);
                 }
             }
         }
@@ -31,7 +31,7 @@ namespace crud
 
             List<Author> authors = BLL.ReturnAuthors();
             List<Author> matchingAutors = BLL.ReturnMatchingAuthorsSearchString(searchString);
-               
+
             if (matchingAutors.Count == 0)
                 Console.WriteLine("No matching authors were found");
             else
@@ -55,7 +55,7 @@ namespace crud
             {
                 Console.WriteLine(matchingAuthor.FirstName + " " + matchingAuthor.LastName);
             }
-       
+
         }
         public void AddAuthor()
         {
@@ -77,7 +77,7 @@ namespace crud
             bool authorSuccessfullyAdded = BLL.AddAuthor(author);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(authorSuccessfullyAdded? "Author successfylly added to database":"Something went wront");
+            Console.WriteLine(authorSuccessfullyAdded ? "Author successfylly added to database" : "Something went wront");
             Console.ResetColor();
         }
         public void UpdateAuthorName()
@@ -85,7 +85,6 @@ namespace crud
             char[] delimiters = new char[] { ' ', ',' };
             string[] tokens;
 
-            //make sure the user inputs a fullname of firstname and lastname
             #region make sure user inputs fullname in one line
             while (true)
             {
@@ -104,38 +103,30 @@ namespace crud
             string firstname = tokens[0];
             string lastname = tokens[1];
 
-            #region CRUD
-            using (BooksDB ctx = new BooksDB())
+            //returns how many authors match the user input
+            int matchingAuthors = BLL.CountMatchingAuthors(firstname, lastname);
+
+            if (matchingAuthors > 1)
+                Console.WriteLine(matchingAuthors + " matching authors found");
+            else if (matchingAuthors == 1)
             {
-                //returns how many authors match the user input
-                int matchingAuthors = ctx.Authors.Where(a => a.FirstName.Equals(firstname) && a.LastName.Equals(lastname)).Count();
+                Console.WriteLine(matchingAuthors + " matching author found");
+                Console.Write("Enter new firstname >> ");
+                string newFirstname = Console.ReadLine();
+                Console.Write("Enter new lastname >> ");
+                string newLastname = Console.ReadLine();
 
-                if (matchingAuthors > 1)
-                    Console.WriteLine(matchingAuthors + " matching authors found");
-                else if (matchingAuthors == 1)
+                //CRUD OPERATION FOR UPDATING 
+                using (BooksDB ctx = new BooksDB())
                 {
-                    Console.WriteLine(matchingAuthors + " matching author found");
-                    Console.Write("Enter new firstname >> ");
-                    string newFirstname = Console.ReadLine();
-                    Console.Write("Enter new lastname >> ");
-                    string newLastname = Console.ReadLine();
-
-                    //CRUD OPERATION FOR UPDATING 
-                    Author UpdateMe = (from a in ctx.Authors
-                                       where a.FirstName.Equals(firstname)
-                                       && a.LastName.Equals(lastname)
-                                       select a).First();
-                    UpdateMe.FirstName = newFirstname;
-                    UpdateMe.LastName = newLastname;
-                    ctx.Database.Log = Console.WriteLine;
-                    ctx.SaveChanges();
+                    Author Update = BLL.GetAuthorToUpdateName(firstname, lastname, ctx);
+                    bool updateSucceeded = BLL.UpdateAuthorName(Update, newFirstname, newLastname, ctx);
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Author successfully updated");
+                    Console.WriteLine(updateSucceeded ? "Author successfully updated" : "Update failed");
                     Console.ResetColor();
                 }
-            } 
-            #endregion
+            }
         }
         public void UpdateAuthorAge()
         {
@@ -158,7 +149,7 @@ namespace crud
                     context.Database.Log = Console.WriteLine;
                     context.SaveChanges();
 
-                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to "+newAge);
+                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to " + newAge);
                 }
             }
         }
@@ -178,7 +169,7 @@ namespace crud
                     context.Database.Log = Console.WriteLine;
                     context.SaveChanges();
 
-                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName +" removed from database");
+                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " removed from database");
                 }
             }
         }

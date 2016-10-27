@@ -14,14 +14,14 @@ namespace crud
     /// </summary>
     static class BLL
     {
-        static BooksDB _context;
+        static BooksDB _context = new BooksDB();
 
         internal static List<Author> ReturnAuthors()
         {
             using (BooksDB ctx = new BooksDB())
             {
                 List<Author> authors = new List<Author>();
-                foreach(var author in ctx.Authors)
+                foreach (var author in ctx.Authors)
                 {
                     authors.Add(author);
                 }
@@ -55,6 +55,37 @@ namespace crud
                     return false;
                 }
             }
+        }
+
+        internal static int CountMatchingAuthors(params string[] names)
+        {
+            return ReturnAuthors().Where(a => a.FirstName.Equals(names[0]) && a.LastName.Equals(names[1])).Count();
+        }
+
+        internal static Author GetAuthorToUpdateName(string firstname, string lastname,BooksDB ctx)
+        {
+            //returns the author which is to be updated
+            return (from a in ctx.Authors
+                    where a.FirstName.Equals(firstname)
+                    && a.LastName.Equals(lastname)
+                    select a).First();
+        }
+        internal static bool UpdateAuthorName(Author update, string newfirstname, string newlastname, BooksDB ctx)
+        {
+            try
+            {
+                update.FirstName = newfirstname;
+                update.LastName = newlastname;
+                ctx.Database.Log = Console.WriteLine;
+                ctx.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
         }
     }
 }
