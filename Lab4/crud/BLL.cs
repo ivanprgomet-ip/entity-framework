@@ -36,7 +36,7 @@ namespace crud
 
         internal static Author ReturnMatchingAuthorID(int searchID)
         {
-            return ReturnAuthors().Where(a => a.AuthorID == searchID).FirstOrDefault();
+            return _context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
         }
 
         internal static bool AddAuthor(Author author)
@@ -62,7 +62,7 @@ namespace crud
             return ReturnAuthors().Where(a => a.FirstName.Equals(names[0]) && a.LastName.Equals(names[1])).Count();
         }
 
-        internal static Author GetAuthorToUpdateName(string firstname, string lastname,BooksDB ctx)
+        internal static Author GetAuthorToUpdateName(string firstname, string lastname, BooksDB ctx)
         {
             //returns the author which is to be updated
             return (from a in ctx.Authors
@@ -86,6 +86,28 @@ namespace crud
                 return false;
             }
 
+        }
+
+        internal static bool UpdateAuthorAge(Author matchingAutor, int newAge)
+        {
+            try
+            {
+                matchingAutor.Age = newAge;
+                _context.Database.Log = Console.WriteLine;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        internal static void RemoveAuthor(int searchID)
+        {
+            _context.Authors.Remove(_context.Authors.Where(a => a.AuthorID.Equals(searchID)).First());
+            _context.Database.Log = Console.WriteLine;
+            _context.SaveChanges();
         }
     }
 }

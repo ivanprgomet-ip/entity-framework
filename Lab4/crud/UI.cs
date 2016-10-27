@@ -133,44 +133,31 @@ namespace crud
             Console.Write("Enter ID of author to update age >> ");
             int searchID = int.Parse(Console.ReadLine());
 
-            using (BooksDB context = new BooksDB())
+            Author matchingAutor = BLL.ReturnMatchingAuthorID(searchID);
+            if (matchingAutor == null)
+                Console.WriteLine("No matching author with that ID found");
+            else
             {
-                Author matchingAutor = context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
-                if (matchingAutor == null)
-                    Console.WriteLine("No matching author with that ID found");
-                else
-                {
-                    Console.Write("Enter new age >> ");
-                    int newAge = int.Parse(Console.ReadLine());
+                Console.Write("Enter new age >> ");
+                int newAge = int.Parse(Console.ReadLine());
 
-                    //CRUD
-                    Author ToBeUpdated = context.Authors.Where(a => a.AuthorID.Equals(searchID)).First();
-                    ToBeUpdated.Age = newAge;
-                    context.Database.Log = Console.WriteLine;
-                    context.SaveChanges();
-
-                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to " + newAge);
-                }
+                //CRUD
+                BLL.UpdateAuthorAge(matchingAutor, newAge);
+                Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " age updated to " + newAge);
             }
         }
         public void RemoveAuthor()
         {
             Console.WriteLine("Enter ID of author to remove: ");
             int searchID = int.Parse(Console.ReadLine());
-            using (BooksDB context = new BooksDB())
-            {
-                Author matchingAutor = context.Authors.Where(a => a.AuthorID == searchID).FirstOrDefault();
-                if (matchingAutor == null)
-                    Console.WriteLine("No matching author with that ID found");
-                else
-                {
-                    //CRUD
-                    context.Authors.Remove(context.Authors.Where(a => a.AuthorID.Equals(searchID)).First());//remove author with mathcing ID
-                    context.Database.Log = Console.WriteLine;
-                    context.SaveChanges();
 
-                    Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " removed from database");
-                }
+            Author matchingAutor = BLL.ReturnMatchingAuthorID(searchID);
+            if (matchingAutor == null)
+                Console.WriteLine("No matching author with that ID found");
+            else
+            {
+                BLL.RemoveAuthor(searchID);
+                Console.WriteLine(matchingAutor.FirstName + " " + matchingAutor.LastName + " removed from database");
             }
         }
 
