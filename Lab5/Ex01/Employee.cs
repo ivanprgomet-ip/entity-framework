@@ -11,5 +11,42 @@ namespace Ex01
         public int id;
         public string name;
         public DateTime hiredate;
+
+        public static List<Employee> GenerateEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+            employees.Add(new Employee()
+            {
+                id = 1,
+                name = "tom",
+                hiredate = new DateTime(2009, 03, 20)
+            });
+            employees.Add(new Employee()
+            {
+                id = 2,
+                name = "lisa",
+                hiredate = new DateTime(2016, 03, 20)
+            });
+            employees.Add(new Employee()
+            {
+                id = 3,
+                name = "cindy",
+                hiredate = new DateTime(2009, 03, 20)
+            });
+            employees.Add(new Employee()
+            {
+                id = 4,
+                name = "stewart",
+                hiredate = new DateTime(2010, 03, 20)
+            });
+            employees.Add(new Employee()
+            {
+                id = 5,
+                name = "mark",
+                hiredate = new DateTime(2016, 03, 20)
+            });
+
+            return employees;
+        }
     }
 }
