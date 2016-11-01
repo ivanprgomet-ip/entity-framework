@@ -55,10 +55,19 @@ namespace Ex01
             //SaveCurrentlyRunningProcesses("processes.xml");
 
             //EX06
-            //I din Main metod skapa upp en array av Employee den måste innehålla minst fyra olika objekt av typen Employee.
+            //Console.WriteLine(SearchArrayForNemo(employeeArray, NemoExists));
             
             Employee[] employeeArray = Employee.GenerateEmployees().ToArray();
-            Console.WriteLine(SearchArrayForNemo(employeeArray, NemoExists));
+
+            //using array
+            Employee nemoObj = Array.Find(employeeArray,FindNemo);
+            Console.WriteLine(nemoObj.name);
+
+
+            //using predicate
+            Predicate<Employee> nemofinder = (Employee e) => { return e.name == "nemo"; };
+            Employee nemo = employeeArray.ToList().Find(nemofinder);
+            Console.WriteLine(nemo.name);
 
         }
         public static Type[] GetTypesFromExecutingAssembly()
@@ -92,21 +101,28 @@ namespace Ex01
             ids.ToList().ForEach(e => Console.WriteLine(e));
         }
 
-        public static bool NemoExists(Employee e)
+        public static bool FindNemo(Employee e)
         {
-                if (e.name == "nemo")
-                    return true;
-                else
-                    return false;
+            if (e.name.ToUpper() == "NEMO")
+                return true;
+            else
+                return false; 
         }
-        public static string SearchArrayForNemo(Employee[] emps, FindNemoPredicate nemoExists)
-        {
-            foreach (var e in emps)
-            {
-                if (nemoExists(e))
-                    return e.name;
-            }
-            return "not found";
-        }
+        //public static bool NemoExists(Employee e)
+        //{
+        //        if (e.name == "nemo")
+        //            return true;
+        //        else
+        //            return false;
+        //}
+        //public static string SearchArrayForNemo(Employee[] emps, FindNemoPredicate nemoExists)
+        //{
+        //    foreach (var e in emps)
+        //    {
+        //        if (nemoExists(e))
+        //            return e.name;
+        //    }
+        //    return "not found";
+        //}
     }
 }
