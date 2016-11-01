@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Ex01
 {
@@ -36,23 +39,45 @@ namespace Ex01
 
 
             //EX03
-            Type[] types = GetTypesFromExecutingAssembly();
-            IEnumerable<string> typesQuery = from t
-                                             in types
-                                             where t.IsPublic
-                                             select t.FullName;
-            foreach (var t in typesQuery)
-            {
-                Console.WriteLine(t);
-            }
+            //Type[] types = GetTypesFromExecutingAssembly();
+            //IEnumerable<string> typesQuery = from t
+            //                                 in types
+            //                                 where t.IsPublic
+            //                                 select t.FullName;
+            //foreach (var t in typesQuery)
+            //{
+            //    Console.WriteLine(t);
+            //}
 
             //EX04
-
+            SaveCurrentlyRunningProcesses("processes.xml");
+            XmlTextReader reader = new XmlTextReader("processes.xml");
+            while (reader.Read())
+            {
+                // Do some work here on the data?
+                Console.WriteLine($"{reader["Name"]} {reader["PID"]}");
+            }
+            Console.ReadLine();
 
         }
         public static Type[] GetTypesFromExecutingAssembly()
         {
             return Assembly.GetExecutingAssembly().GetTypes();
+        }
+        public static void SaveCurrentlyRunningProcesses(string filename)
+        {
+            var query = from p in Process.GetProcesses()
+                        orderby p.ProcessName ascending
+                        select
+                            new XElement("process",
+                                new XAttribute("Name", p.ProcessName),
+                                new XAttribute("PID", p.Id));
+            XElement xmlDoc = new XElement("processes",query);
+            xmlDoc.Save(filename);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("successfully saved currently running processes into "+filename);
+            Console.ResetColor();
         }
     }
 }
