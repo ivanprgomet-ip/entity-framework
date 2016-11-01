@@ -10,6 +10,8 @@ using System.Xml.Linq;
 
 namespace Ex01
 {
+    //declare
+    public delegate bool FindNemoPredicate(Employee e);
 
     public class Sample { /*sample for exercise 03*/}
     public class Program
@@ -50,7 +52,14 @@ namespace Ex01
             //}
 
             //EX04 & EX05
-            SaveCurrentlyRunningProcesses("processes.xml");
+            //SaveCurrentlyRunningProcesses("processes.xml");
+
+            //EX06
+            //I din Main metod skapa upp en array av Employee den måste innehålla minst fyra olika objekt av typen Employee.
+            
+            Employee[] employeeArray = Employee.GenerateEmployees().ToArray();
+            Console.WriteLine(SearchArrayForNemo(employeeArray, NemoExists));
+
         }
         public static Type[] GetTypesFromExecutingAssembly()
         {
@@ -64,7 +73,7 @@ namespace Ex01
                             new XElement("process",
                                 new XAttribute("Name", p.ProcessName),
                                 new XAttribute("PID", p.Id));
-            XElement xmlDoc = new XElement("processes",query);
+            XElement xmlDoc = new XElement("processes", query);
 
             xmlDoc.Save(filename);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -81,6 +90,23 @@ namespace Ex01
 
             //prints the unique process id(s) of the visual studio instances
             ids.ToList().ForEach(e => Console.WriteLine(e));
+        }
+
+        public static bool NemoExists(Employee e)
+        {
+                if (e.name == "nemo")
+                    return true;
+                else
+                    return false;
+        }
+        public static string SearchArrayForNemo(Employee[] emps, FindNemoPredicate nemoExists)
+        {
+            foreach (var e in emps)
+            {
+                if (nemoExists(e))
+                    return e.name;
+            }
+            return "not found";
         }
     }
 }

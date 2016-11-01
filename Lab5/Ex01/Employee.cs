@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex01
 {
-    class Employee
+    public class Employee
     {
         public int id;
         public string name;
@@ -25,7 +25,7 @@ namespace Ex01
             employees.Add(new Employee()
             {
                 id = employees.Count + 1,
-                name = "lisa",
+                name = "nemo",
                 hiredate = new DateTime(2016, 03, 20)
             });
             employees.Add(new Employee()
