@@ -49,16 +49,8 @@ namespace Ex01
             //    Console.WriteLine(t);
             //}
 
-            //EX04
+            //EX04 & EX05
             SaveCurrentlyRunningProcesses("processes.xml");
-            XmlTextReader reader = new XmlTextReader("processes.xml");
-            while (reader.Read())
-            {
-                // Do some work here on the data?
-                Console.WriteLine($"{reader["Name"]} {reader["PID"]}");
-            }
-            Console.ReadLine();
-
         }
         public static Type[] GetTypesFromExecutingAssembly()
         {
@@ -73,11 +65,22 @@ namespace Ex01
                                 new XAttribute("Name", p.ProcessName),
                                 new XAttribute("PID", p.Id));
             XElement xmlDoc = new XElement("processes",query);
-            xmlDoc.Save(filename);
 
+            xmlDoc.Save(filename);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("successfully saved currently running processes into "+filename);
+            Console.WriteLine("successfully saved currently running processes into " + filename);
             Console.ResetColor();
+
+            //Console.WriteLine(xmlDoc);//print xml document
+
+            IEnumerable<int> ids = from e
+                                   in xmlDoc.Descendants()
+                                   where e.Attribute("Name").Value == "devenv"
+                                   orderby (int)e.Attribute("PID")
+                                   select (int)e.Attribute("PID");
+
+            //prints the unique process id(s) of the visual studio instances
+            ids.ToList().ForEach(e => Console.WriteLine(e));
         }
     }
 }
