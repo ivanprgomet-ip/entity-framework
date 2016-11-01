@@ -10,8 +10,7 @@ using System.Xml.Linq;
 
 namespace Ex01
 {
-    //declare
-    public delegate bool FindNemoPredicate(Employee e);
+    //public delegate bool FindNemoPredicate(Employee e);
 
     public class Sample { /*sample for exercise 03*/}
     public class Program
@@ -56,13 +55,11 @@ namespace Ex01
 
             //EX06
             //Console.WriteLine(SearchArrayForNemo(employeeArray, NemoExists));
-            
             Employee[] employeeArray = Employee.GenerateEmployees().ToArray();
 
-            //using array
+            //using array (assignment)
             Employee nemoObj = Array.Find(employeeArray,FindNemo);
             Console.WriteLine(nemoObj.name);
-
 
             //using predicate
             Predicate<Employee> nemofinder = (Employee e) => { return e.name == "nemo"; };
