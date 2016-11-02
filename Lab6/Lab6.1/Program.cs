@@ -87,17 +87,11 @@ namespace Lab6._1
             //}
 
 
-            //running this will create the database
             using (EducationalContext ectx = new EducationalContext())
             {
+                //adding the students will in turn add the enrollments which will in turn add the courses!
                 ectx.Students.AddRange(Students);
-
-                ectx.Courses.Add(EntityFrameworkCourse);
-                ectx.Courses.Add(DotNetFrameworkCourse);
-                ectx.Courses.Add(JavascriptCourse);
-                ectx.Courses.Add(HttpCourse);
-                ectx.Courses.Add(SecurityManagementCourse);
-
+                ectx.Database.Log = Console.WriteLine;
                 ectx.SaveChanges();
             }
         }
