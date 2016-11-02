@@ -81,14 +81,25 @@ namespace Lab6._1
                 s1,s2,s3
             };
 
-            foreach (var s in Students)
+            //foreach (var s in Students)
+            //{
+            //    PrintStudent(s);
+            //}
+
+
+            //running this will create the database
+            using (EducationalContext ectx = new EducationalContext())
             {
-                PrintStudent(s);
+                ectx.Students.AddRange(Students);
+
+                ectx.Courses.Add(EntityFrameworkCourse);
+                ectx.Courses.Add(DotNetFrameworkCourse);
+                ectx.Courses.Add(JavascriptCourse);
+                ectx.Courses.Add(HttpCourse);
+                ectx.Courses.Add(SecurityManagementCourse);
+
+                ectx.SaveChanges();
             }
-
-
-
-
         }
         public static void PrintStudent(Student s)
         {
