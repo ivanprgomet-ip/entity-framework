@@ -16,7 +16,8 @@ namespace EFlib
         public string MovieName { get; set; }
         public string MovieDirector { get; set; }
         public DateTime? MovieReleaseDate { get; set; }
-        public int? GenreID { get; set; }
+
+        //public int? GenreID { get; set; }
         public virtual Genre Genre { get; set; }
     }
 }
