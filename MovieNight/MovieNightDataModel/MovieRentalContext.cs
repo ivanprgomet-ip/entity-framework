@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieNightDataModel
 {
-    public class Class1
+    public class MovieRentalContext
     {
     }
 }

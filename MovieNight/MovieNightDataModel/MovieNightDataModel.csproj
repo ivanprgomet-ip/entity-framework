@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>583ab137-44f7-4227-8edc-b5c3bc2df37c</ProjectGuid>
+    <ProjectGuid>73c95f5e-36a9-4a31-a49c-653bebf2d64c</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MovieNightDataModel</RootNamespace>
