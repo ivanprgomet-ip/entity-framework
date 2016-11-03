@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DAL
+namespace EFlib
 {
     public class Movie
     {
