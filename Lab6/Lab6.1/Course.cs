@@ -11,5 +11,6 @@ namespace Lab6._1
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public int Credits { get; set; }
+
     }
 }

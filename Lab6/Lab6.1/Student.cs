@@ -17,7 +17,7 @@ namespace Lab6._1
         //Ändra så att den inte laddar in alla enrollments för varje student
         public Student()
         {
-            
+            //Enrollments = new List<Enrollment>();
         }
         public Student(string lastname, string firstmidname, DateTime enrollmentdate)
         {
@@ -26,6 +26,8 @@ namespace Lab6._1
             this.EnrollmentDate = enrollmentdate;
 
             //TODO: not neccessary to initialize new icollection of enrollments here...?
+            //Enrollments = new List<Enrollment>();
+
         }
 
     }

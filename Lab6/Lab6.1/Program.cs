@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,9 +74,10 @@ namespace Lab6._1
                     EnrollmentName ="Network Security",
                     Course = SecurityManagementCourse,
                     Grade ="A-C" },
-            }; 
+            };
             #endregion
 
+            #region students list and print
             List<Student> Students = new List<Student>()
             {
                 s1,s2,s3
@@ -84,15 +86,20 @@ namespace Lab6._1
             //foreach (var s in Students)
             //{
             //    PrintStudent(s);
-            //}
+            //} 
+            #endregion
 
 
             using (EducationalContext ectx = new EducationalContext())
             {
-                //adding the students will in turn add the enrollments which will in turn add the courses!
+                ectx.Configuration.LazyLoadingEnabled = false;
+
+                Student chosen = SearchStudent("Jason",ectx);
+
+
                 ectx.Students.AddRange(Students);
                 ectx.Database.Log = Console.WriteLine;
-                ectx.SaveChanges();
+                //ectx.SaveChanges();
             }
         }
         public static void PrintStudent(Student s)
@@ -110,6 +117,19 @@ namespace Lab6._1
                 Console.WriteLine();
             }
             Console.WriteLine(".......................................");
+        }
+
+        public static Student SearchStudent(string firstmidname, EducationalContext ctx)
+        {
+            Student student = ctx.Students.Where(s => s.FirstMidName == firstmidname)
+                .Include(s => s.Enrollments)
+                .FirstOrDefault();
+            foreach (Enrollment enrollment in student.Enrollments)
+            {
+                //TODO: FIX THIS NULLREFERENCE EXCEPTION
+                Console.WriteLine(enrollment.Course.CourseName+" "+ enrollment.Course.CourseID+" "+ enrollment.Course.Credits);
+            }
+            return student;
         }
     }
 }
