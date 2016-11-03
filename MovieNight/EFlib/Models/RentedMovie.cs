@@ -14,5 +14,11 @@ namespace EFlib
         public Movie Movie { get; set; }
 
         public DateTime ReturnDate { get; set; }
+
+        public RentedMovie()
+        {
+            Customer = new Customer();
+            Movie = new Movie();
+        }
     }
 }

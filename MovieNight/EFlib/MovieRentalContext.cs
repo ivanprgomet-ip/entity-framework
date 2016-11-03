@@ -22,7 +22,9 @@ namespace EFlib
         public DbSet<Genre> Genres { get; set; }
 
 
-        #region dropcreatedatabase always
+        /// <summary>
+        /// will allways drop the database and run seed method
+        /// </summary>
         public class DropCreateDatabaseAlways : DropCreateDatabaseAlways<MovieRentalContext>
         {
             protected override void Seed(MovieRentalContext context)
@@ -31,6 +33,10 @@ namespace EFlib
                 base.Seed(context);
             }
         }
+        /// <summary>
+        /// method for seeding initial data at database creation
+        /// </summary>
+        /// <param name="ctx"></param>
         private void Seed(MovieRentalContext ctx)
         {
             DateTime oneWeekFromNow = new DateTime().AddDays(7);
@@ -56,7 +62,7 @@ namespace EFlib
             Customer c3 = new Customer() { CustomerName = "Cindy Lauper", CustomerAdress = "Dilinger Street 4", CustomerPhone = "00922772212" };
 
             RentedMovie rm1 = new RentedMovie() { Customer = c1, Movie = m2, ReturnDate = new DateTime(2020, 03, 12) };
-            RentedMovie rm2 = new RentedMovie() { Customer = c2, Movie = m2, ReturnDate = new DateTime(2020, 03, 12) };
+            RentedMovie rm2 = new RentedMovie() { Customer = c2, Movie = m5, ReturnDate = new DateTime(2020, 03, 12) };
 
             ctx.Customers.AddRange(new HashSet<Customer>() { c1, c2, c3 });
             ctx.Genres.AddRange(new HashSet<Genre>() { g1, g2, g3, g4, g5, g6, g7 });
@@ -66,6 +72,5 @@ namespace EFlib
             //ctx.Database.Log = Console.WriteLine;
             ctx.SaveChanges();
         }
-        #endregion
     }
 }
