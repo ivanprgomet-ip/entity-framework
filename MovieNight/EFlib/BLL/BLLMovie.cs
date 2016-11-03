@@ -30,5 +30,30 @@ namespace EFlib.BLL
             List<Movie> movies = _context.Movies.ToList();
             return movies;
         }
+
+        /// <summary>
+        /// return movies that are not rented, and thus currently available
+        /// </summary>
+        /// <returns></returns>
+        //public static List<Movie> ReturnAvailableMovies()
+        //{
+            //List<RentedMovie> unavailableMovies = BLLRentedMovie.ReturnAllRentedMovies();
+            //List<Movie> allMovies = ReturnAllMovies();
+            //List<Movie> availableMovies = new List<Movie>();
+
+            //for (int i = 0; i < allMovies.Count; i++)
+            //{
+            //    foreach (var unavailableMovie in unavailableMovies)
+            //    {
+            //            Movie currentRented = unavailableMovie.Movie;
+
+            //            if(allMovies.Contains(currentRented))
+            //            {
+            //                allMovies.Remove(currentRented);
+            //            }
+            //    }
+            //}
+        //    return allMovies;
+        //}
     }
 }

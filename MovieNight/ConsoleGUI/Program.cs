@@ -16,12 +16,15 @@ namespace ConsoleGUI
 
             //MovieRentalContext ctx = new MovieRentalContext();
 
-            Run();
+            while (true)
+            {
+                Run();
+            }
 
 
 
             //RegisterNewCustomer();
-            PrintAllCustomers();
+            PrintCustomers();
             //RegisterNewMovie();
             //MarkMovieAsRented();
             //MarkMovieAsReturned();
@@ -32,15 +35,16 @@ namespace ConsoleGUI
         {
             Console.WriteLine("1. Print all Customers");
             Console.WriteLine("2. Register new customer");
-            Console.WriteLine("3. Print movies and statuses (hired and returned)");
+            Console.WriteLine("3. Print movies (and currently hired movies)");
             Console.WriteLine("4. Hire Movie");
             Console.WriteLine("5. Return Movie");
+            Console.WriteLine("6. Register New Movie");
             string choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    PrintAllCustomers();
+                    PrintCustomers();
                     Console.ReadKey();
                     Console.Clear();
                     break;
@@ -56,10 +60,29 @@ namespace ConsoleGUI
                     Console.Clear();
                     break;
                 case "4":
-                    //get all movies that are not rented
-                    //choose one of movies
-                    //choose which person to hire the movie
-                    //add the movie to the rentedmovies
+
+                    //List<Movie>availableMovies = BLLMovie.ReturnAvailableMovies();
+                    //foreach (var m in availableMovies)
+                    //{
+                    //    Console.WriteLine(m.MovieId+" "+m.MovieName);
+                    //}
+                    //Console.WriteLine("Choose which movie to hire >> ");
+                    //int MovieToBeHired = int.Parse(Console.ReadLine());
+
+
+                    //List<Customer> customers =  BLLCustomer.ReturnAllCustomers();
+                    //foreach (var c in customers)
+                    //{
+                    //    Console.WriteLine(c.CustomerID+" "+c.CustomerName);
+                    //}
+                    //Console.Write("Hire a Movie as specific customer >> ");
+                    //int CustomerThatsHiring = int.Parse(Console.ReadLine());
+                    //Console.ReadKey();
+
+
+
+                    //BLLCustomer.HireMovieAs(CustomerThatsHiring,MovieToBeHired)
+                    //BLLRentedMovie.AddNewRentedMovie()
                     Console.ReadKey();
                     Console.Clear();
                     break;
@@ -72,12 +95,30 @@ namespace ConsoleGUI
                     Console.ReadKey();
                     Console.Clear();
                     break;
+                case "6":
+                    RegisterNewMovie();
+                    break;
                 default:
                     Console.WriteLine("App is closing...");
                     break;
             }
         }
 
+        private static void RegisterNewMovie()
+        {
+            Console.Write("Enter movietitle >> ");
+            string movieTitle= Console.ReadLine();
+            Console.Write("Enter moviedirector >> ");
+            string movieDirector = Console.ReadLine();
+            Console.Write("Enter genre with first letter uppercase >> ");
+            string movieGenre = Console.ReadLine();
+
+            Genre currentGenre = new Genre() { GenreName = movieGenre };
+
+            Movie newMovie = new Movie() { Genre = currentGenre, MovieDirector = movieDirector, MovieName = movieTitle };
+            bool success = BLLMovie.RegisterNewMovie(newMovie);
+            Console.WriteLine(success ? $"Movie {newMovie} Registered" : "Movie Registration Failed");
+        }
         private static void PrintMovies()
         {
             List<Movie> movies = BLLMovie.ReturnAllMovies();
@@ -103,7 +144,19 @@ namespace ConsoleGUI
             Console.WriteLine("...............");
         }
 
-        private static void PrintAllCustomers()
+        private static void RegisterNewCustomer()
+        {
+            Console.WriteLine("Enter name >> ");
+            string customername = Console.ReadLine();
+            Console.WriteLine("Enter address >> ");
+            string customeraddress= Console.ReadLine();
+            Console.WriteLine("Enter phone >> ");
+            string customerphone= Console.ReadLine();
+
+            bool success = BLLCustomer.RegisterNewCustomer(new Customer(customername, customeraddress, customerphone));
+            Console.WriteLine(success?$"Customer {customername} Registered":"Customer Registration Failed");
+        }
+        private static void PrintCustomers()
         {
             List<Customer> customers = BLLCustomer.ReturnAllCustomers();
             foreach (var customer in customers)
@@ -127,23 +180,7 @@ namespace ConsoleGUI
             throw new NotImplementedException();
         }
 
-        private static void RegisterNewMovie()
-        {
-            throw new NotImplementedException();
-        }
 
-        private static void RegisterNewCustomer()
-        {
-            Console.WriteLine("Enter name >> ");
-            string customername = Console.ReadLine();
-            Console.WriteLine("Enter address >> ");
-            string customeraddress= Console.ReadLine();
-            Console.WriteLine("Enter phone >> ");
-            string customerphone= Console.ReadLine();
-
-            bool success = BLLCustomer.RegisterNewCustomer(new Customer(customername, customeraddress, customerphone));
-            Console.WriteLine(success?"Customer Registered":"Customer Registration Failed");
-        }
 
 
     }

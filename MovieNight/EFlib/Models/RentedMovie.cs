@@ -19,6 +19,7 @@ namespace EFlib
         {
             Customer = new Customer();
             Movie = new Movie();
+            //add new datetime with one week ahead
         }
     }
 }

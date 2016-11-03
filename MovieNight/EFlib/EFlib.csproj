@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLLCustomer.cs" />
+    <Compile Include="BLL\BLLGenre.cs" />
     <Compile Include="BLL\BLLMovie.cs" />
     <Compile Include="BLL\BLLRentedMovie.cs" />
     <Compile Include="MovieRentalContext.cs" />
