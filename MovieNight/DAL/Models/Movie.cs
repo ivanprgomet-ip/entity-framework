@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MovieNightConsole
+namespace MovieNightDataModel
 {
     internal class Movie
     {
@@ -11,7 +11,6 @@ namespace MovieNightConsole
         //public int MovieLength{ get; set; }
         //public Dictionary<string,string> MovieTop3Actors { get; set; }
         //public string MovieDirector { get; set;}
-
 
         public int MovieId { get; set; }
         public string MovieName { get; set; }

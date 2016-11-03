@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MovieNightConsole")]
+[assembly: AssemblyTitle("ConsoleGUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MovieNightConsole")]
+[assembly: AssemblyProduct("ConsoleGUI")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f0f2bd44-497b-4e41-a889-cd6af5e9c029")]
+[assembly: Guid("99199adf-2f08-435e-8354-ede91b3d6afd")]
 
 // Version information for an assembly consists of the following four values:
 //

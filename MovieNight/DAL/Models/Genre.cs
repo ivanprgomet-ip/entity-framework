@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieNightConsole
+namespace MovieNightDataModel
 {
     class Genre
     {
         public virtual ICollection<Movie> Movies { get; set; }
         public int GenreID { get; set; }
-        public string Genre1 { get; set; }
+        public string GenreName { get; set; }
 
 
         public Genre()
