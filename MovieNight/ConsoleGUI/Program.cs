@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using EFlib;
+using EFlib.BLL;
 
 namespace ConsoleGUI
 {
@@ -12,7 +13,7 @@ namespace ConsoleGUI
     {
         static void Main(string[] args)
         {
-            MovieRentalContext ctx = new MovieRentalContext();
+            Initializer.InitializeDatabase();
         }
     }
 }
