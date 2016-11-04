@@ -15,6 +15,7 @@ namespace EFlib.BLL
         {
             try
             {
+                //todo: when making a new hire, the catch is run, this is never saved..
                 _context.RentedMovies.Add(newRentedMovie);
                 _context.Database.Log = Console.WriteLine;
                 _context.SaveChanges();

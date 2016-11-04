@@ -61,6 +61,7 @@ namespace ConsoleGUI
                     break;
                 case "4":
 
+                    //get the available movies only
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
                     foreach (var m in availableMovies)
@@ -68,19 +69,34 @@ namespace ConsoleGUI
                         Console.WriteLine(m.MovieId + " " + m.MovieName);
                     }
                     Console.WriteLine("Choose which movie to hire >> ");
-                    int MovieToBeHired = int.Parse(Console.ReadLine());
+                    int movieToBeHiredID = int.Parse(Console.ReadLine());
+                    Movie movieToBeHired = BLLMovie.ReturnMovieWithID(movieToBeHiredID);
+
+                    Console.WriteLine(movieToBeHired.MovieName+" ("+movieToBeHired.Genre.GenreName+") was choosen");
+                    Console.WriteLine();
+
+                    //choose who is going to hire the movie choosen from the available movies above
+                    List<Customer> customers = BLLCustomer.ReturnAllCustomers();
+                    foreach (var c in customers)
+                    {
+                        Console.WriteLine(c.CustomerID + " " + c.CustomerName);
+                    }
+                    Console.Write("Who is going to make the hire >> ");
+                    int customerThatsHiringID = int.Parse(Console.ReadLine());
+                    Customer customerThatsHiring = BLLCustomer.ReturnCustomerWithID(customerThatsHiringID);
 
 
-                    //List<Customer> customers =  BLLCustomer.ReturnAllCustomers();
-                    //foreach (var c in customers)
-                    //{
-                    //    Console.WriteLine(c.CustomerID+" "+c.CustomerName);
-                    //}
-                    //Console.Write("Hire a Movie as specific customer >> ");
-                    //int CustomerThatsHiring = int.Parse(Console.ReadLine());
-                    //Console.ReadKey();
+                    //the actual renting of the movie
+                    RentedMovie newRentedMovie = new RentedMovie()
+                    {
+                        Customer = customerThatsHiring,
+                        Movie = movieToBeHired,
+                        ReturnDate = new DateTime(2999, 01, 01),
+                    };
+                    BLLRentedMovie.AddNewRentedMovie(newRentedMovie);//todo: fix this method. something wrong with the context
 
-
+                    Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName+ ". Return date : "+newRentedMovie.ReturnDate.ToString());
+                    Console.WriteLine();
 
                     //BLLCustomer.HireMovieAs(CustomerThatsHiring,MovieToBeHired)
                     //BLLRentedMovie.AddNewRentedMovie()

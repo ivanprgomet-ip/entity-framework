@@ -37,16 +37,16 @@ namespace EFlib.BLL
         /// <returns></returns>
         public static List<Movie> ReturnAvailableMovies()
         {
-            List<Movie> notHiredMovies = ReturnAllMovies();
+            List<Movie> availableMovies = ReturnAllMovies();
             List<RentedMovie> hiredMovies = BLLRentedMovie.ReturnAllRentedMovies();
 
-            for (int i = 0; i < notHiredMovies.Count; i++)
+            for (int i = 0; i < availableMovies.Count; i++)
             {
                 for (int j = 0; j < hiredMovies.Count; j++)
                 {
-                    if (notHiredMovies[i].MovieId == hiredMovies[j].Movie.MovieId)
+                    if (availableMovies[i].MovieId == hiredMovies[j].Movie.MovieId)
                     {
-                        notHiredMovies.Remove(notHiredMovies[i]);
+                        availableMovies.Remove(availableMovies[i]);
                         break;
                     }
                 }
@@ -61,7 +61,17 @@ namespace EFlib.BLL
                 //    }
                 //}
             }
-            return notHiredMovies;
+            return availableMovies;
+        }
+
+        /// <summary>
+        /// returns the movie with the corresponding ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Movie ReturnMovieWithID(int id)
+        {
+            return _context.Movies.Find(id);
         }
     }
 }

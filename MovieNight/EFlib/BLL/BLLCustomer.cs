@@ -32,5 +32,10 @@ namespace EFlib.BLL
             List<Customer> customers = _context.Customers.ToList();
             return customers;
         }
+
+        public static Customer ReturnCustomerWithID(int customerThatsHiringID)
+        {
+            return _context.Customers.Find(customerThatsHiringID);
+        }
     }
 }
