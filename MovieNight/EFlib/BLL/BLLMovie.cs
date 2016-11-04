@@ -73,5 +73,21 @@ namespace EFlib.BLL
         {
             return _context.Movies.Find(id);
         }
+
+        public static bool AddNewRentedMovie(RentedMovie newRentedMovie)
+        {
+            try
+            {
+                //addnewrentedmovie method must be here so that we use the same context, and thus save the changes..
+                _context.RentedMovies.Add(newRentedMovie);
+                _context.Database.Log = Console.WriteLine;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

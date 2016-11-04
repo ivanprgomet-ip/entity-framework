@@ -21,14 +21,6 @@ namespace ConsoleGUI
                 Run();
             }
 
-
-
-            //RegisterNewCustomer();
-            PrintCustomers();
-            //RegisterNewMovie();
-            //MarkMovieAsRented();
-            //MarkMovieAsReturned();
-            //CheckForLateMovies();
         }
 
         public static void Run()
@@ -60,8 +52,9 @@ namespace ConsoleGUI
                     Console.Clear();
                     break;
                 case "4":
+                    // TODO: DUPLICATE CUSTOMER BUG
 
-                    //get the available movies only
+                    //GET AVAILABLE MOVIES
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
                     foreach (var m in availableMovies)
@@ -72,10 +65,10 @@ namespace ConsoleGUI
                     int movieToBeHiredID = int.Parse(Console.ReadLine());
                     Movie movieToBeHired = BLLMovie.ReturnMovieWithID(movieToBeHiredID);
 
-                    Console.WriteLine(movieToBeHired.MovieName+" ("+movieToBeHired.Genre.GenreName+") was choosen");
+                    Console.WriteLine(movieToBeHired.MovieName + " (" + movieToBeHired.Genre.GenreName + ") was choosen");
                     Console.WriteLine();
 
-                    //choose who is going to hire the movie choosen from the available movies above
+                    //CHOOSE CUSTOMER WHO IS HIRING THE MOVIE
                     List<Customer> customers = BLLCustomer.ReturnAllCustomers();
                     foreach (var c in customers)
                     {
@@ -85,32 +78,41 @@ namespace ConsoleGUI
                     int customerThatsHiringID = int.Parse(Console.ReadLine());
                     Customer customerThatsHiring = BLLCustomer.ReturnCustomerWithID(customerThatsHiringID);
 
-
-                    //the actual renting of the movie
+                    //MAKE THE HIRE
                     RentedMovie newRentedMovie = new RentedMovie()
                     {
                         Customer = customerThatsHiring,
                         Movie = movieToBeHired,
                         ReturnDate = new DateTime(2999, 01, 01),
                     };
-                    BLLRentedMovie.AddNewRentedMovie(newRentedMovie);//todo: fix this method. something wrong with the context
+                    BLLMovie.AddNewRentedMovie(newRentedMovie);
 
-                    Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName+ ". Return date : "+newRentedMovie.ReturnDate.ToString());
+                    Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName + ". Return date : " + newRentedMovie.ReturnDate.ToString());
                     Console.WriteLine();
-
-                    //BLLCustomer.HireMovieAs(CustomerThatsHiring,MovieToBeHired)
-                    //BLLRentedMovie.AddNewRentedMovie()
                     Console.ReadKey();
                     Console.Clear();
                     break;
                 case "5":
                     //return movie
 
-                    //get all people that have hired a movie
-                    //choose one of the persons 
-                    //show all moves hired by the person chosen
-                    //choose which movie to return
-                    //remove the rented movie from rentedmovie
+                    Dictionary<Customer, List<Movie>> rentalsDict = BLLRentedMovie.ReturnCustomersWithHiredMovies();
+                    foreach (KeyValuePair<Customer, List<Movie>> kvp in rentalsDict)
+                    {
+                        Console.WriteLine("..................");
+                        Console.WriteLine(kvp.Key.CustomerID + " " + kvp.Key.CustomerName);
+                        foreach (var movie in kvp.Value)
+                        {
+                            Console.WriteLine("* " + movie.MovieName);
+                        }
+                    }
+
+                    Console.Write("Enter ID of customer instance that you want to return movie from >> ");
+                    int returnMovieID = int.Parse(Console.ReadLine());
+
+                    //MAKE THE RETURN
+                    //BLLRentedMovie.ReturnMovieWithID(returnMovieID);
+                    bool returnSuccessfull = BLLRentedMovie.RemoveMovieWithID(returnMovieID);
+                    Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//movie does not get returned
                     Console.ReadKey();
                     Console.Clear();
                     break;
@@ -126,7 +128,7 @@ namespace ConsoleGUI
         private static void RegisterNewMovie()
         {
             Console.Write("Enter movietitle >> ");
-            string movieTitle= Console.ReadLine();
+            string movieTitle = Console.ReadLine();
             Console.Write("Enter moviedirector >> ");
             string movieDirector = Console.ReadLine();
             Console.Write("Enter genre with first letter uppercase >> ");
@@ -168,19 +170,19 @@ namespace ConsoleGUI
             Console.WriteLine("Enter name >> ");
             string customername = Console.ReadLine();
             Console.WriteLine("Enter address >> ");
-            string customeraddress= Console.ReadLine();
+            string customeraddress = Console.ReadLine();
             Console.WriteLine("Enter phone >> ");
-            string customerphone= Console.ReadLine();
+            string customerphone = Console.ReadLine();
 
             bool success = BLLCustomer.RegisterNewCustomer(new Customer(customername, customeraddress, customerphone));
-            Console.WriteLine(success?$"Customer {customername} Registered":"Customer Registration Failed");
+            Console.WriteLine(success ? $"Customer {customername} Registered" : "Customer Registration Failed");
         }
         private static void PrintCustomers()
         {
             List<Customer> customers = BLLCustomer.ReturnAllCustomers();
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.CustomerName+" "+customer.CustomerAdress+" "+customer.CustomerPhone);
+                Console.WriteLine(customer.CustomerName + " " + customer.CustomerAdress + " " + customer.CustomerPhone);
             }
         }
 
