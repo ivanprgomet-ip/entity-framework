@@ -107,8 +107,7 @@ namespace ConsoleGUI
                     Console.Write("Enter ID of customer instance that you want to return movie from >> ");
                     int customerID = int.Parse(Console.ReadLine());
 
-                    //MAKE THE RETURN
-                    //BLLRentedMovie.ReturnMovieWithID(returnMovieID);
+                    //RETURN MOVIE
                     bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(customerID);
                     Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//todo: movie does not get returned after a movie has been hired
                     Console.ReadKey();
@@ -188,19 +187,5 @@ namespace ConsoleGUI
         {
             throw new NotImplementedException();
         }
-
-        private static void MarkMovieAsReturned()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void MarkMovieAsRented()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
     }
 }

@@ -51,8 +51,6 @@ namespace EFlib.BLL
         {
             try
             {
-                //todo: movies that are hired at startup get removed from rented, but new movies that
-                //get hired during runtime, do not get removed 
                 _context.RentedMovies.Remove(ReturnRentedMovieForCustomerID(customerID));
                 _context.Database.Log = Console.WriteLine;
                 _context.SaveChanges();
@@ -63,7 +61,7 @@ namespace EFlib.BLL
                 return false;
             }
         }
-        public static RentedMovie ReturnRentedMovieForCustomerID(int customerID)
+        private static RentedMovie ReturnRentedMovieForCustomerID(int customerID)
         {
             return _context.RentedMovies.FirstOrDefault(m => m.Customer.CustomerID==customerID);
         }
