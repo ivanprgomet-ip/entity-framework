@@ -52,7 +52,6 @@ namespace ConsoleGUI
                     Console.Clear();
                     break;
                 case "4"://TODO: FIND OUT WHY THIS METHOD CREATES ANOTHER CUSTOMER
-                
                     #region retrieve availabla movies to hire
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
@@ -68,7 +67,6 @@ namespace ConsoleGUI
                     Console.WriteLine();
                     #endregion
 
-                
                     #region choose who will hire the movie
                     List<Customer> customers = BLLCustomer.ReturnAllCustomers();
                     foreach (var c in customers)
