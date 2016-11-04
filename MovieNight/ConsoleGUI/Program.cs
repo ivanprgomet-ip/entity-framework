@@ -51,7 +51,7 @@ namespace ConsoleGUI
                     Console.ReadKey();
                     Console.Clear();
                     break;
-                case "4"://TODO: FIND OUT WHY THIS METHOD CREATES ANOTHER CUSTOMER
+                case "4":
                     #region retrieve availabla movies to hire
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
@@ -76,20 +76,21 @@ namespace ConsoleGUI
                     Console.Write("Who is going to make the hire >> ");
                     int customerThatsHiringID = int.Parse(Console.ReadLine());
                     Customer customerThatsHiring = BLLCustomer.ReturnCustomerWithID(customerThatsHiringID);
-
-                    #endregion
-                 
-                    #region make the hire
-                    RentedMovie newRentedMovie = new RentedMovie()
-                    {
-                        Customer = customerThatsHiring,
-                        Movie = movieToBeHired,
-                        ReturnDate = new DateTime(2999, 01, 01),
-                    };
-                    BLLMovie.AddNewRentedMovie(newRentedMovie); 
                     #endregion
 
-                    Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName + ". Return date : " + newRentedMovie.ReturnDate.ToString());
+                    BLLRentedMovie.HireMovie(customerThatsHiring, movieToBeHired);
+
+                    //#region make the hire
+                    //RentedMovie newRentedMovie = new RentedMovie()
+                    //{
+                    //    Customer = customerThatsHiring,
+                    //    Movie = movieToBeHired,
+                    //    ReturnDate = new DateTime(2999, 01, 01),
+                    //};
+                    //BLLMovie.AddNewRentedMovie(newRentedMovie);
+                    //#endregion
+
+                    //Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName + ". Return date : " + newRentedMovie.ReturnDate.ToString());
                     Console.WriteLine();
                     Console.ReadKey();
                     Console.Clear();
@@ -97,23 +98,31 @@ namespace ConsoleGUI
                 case "5":
                     //return movie
 
-                    Dictionary<Customer, List<Movie>> rentalsDict = BLLRentedMovie.ReturnCustomersWithHiredMovies();
-                    foreach (KeyValuePair<Customer, List<Movie>> kvp in rentalsDict)
+                    List<RentedMovie> rentals = BLLRentedMovie.GetRentedMovies();//todo: 
+                    foreach (var rental in rentals)
                     {
-                        Console.WriteLine("..................");
-                        Console.WriteLine(kvp.Key.CustomerID + " " + kvp.Key.CustomerName);
-                        foreach (var movie in kvp.Value)
-                        {
-                            Console.WriteLine("* " + movie.MovieName);
-                        }
+                        Console.WriteLine(rental.RentedID+" "+rental.Movie.MovieName+" HIRED BY: "+rental.Customer.CustomerName);
                     }
+                    Console.Write("Which movie do you wish to return? >> ");
+                    int rentIDToReturn = int.Parse(Console.ReadLine());
+                    BLLRentedMovie.RemoveRentedMovie(rentIDToReturn);
 
-                    Console.Write("Enter ID of customer instance that you want to return movie from >> ");
-                    int customerID = int.Parse(Console.ReadLine());
+                    //Dictionary<Customer, List<Movie>> rentalsDict = BLLRentedMovie.ReturnCustomersWithHiredMovies();
+                    //foreach (KeyValuePair<Customer, List<Movie>> kvp in rentalsDict)
+                    //{
+                    //    Console.WriteLine("..................");
+                    //    Console.WriteLine(kvp.Key.CustomerID + " " + kvp.Key.CustomerName);
+                    //    foreach (var movie in kvp.Value)
+                    //    {
+                    //        Console.WriteLine("* " + movie.MovieName);
+                    //    }
+                    //}
+                    //Console.Write("Enter ID of customer instance that you want to return movie from >> ");
+                    //int customerID = int.Parse(Console.ReadLine());
 
                     //RETURN MOVIE
-                    bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(customerID);
-                    Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//todo: movie does not get returned after a movie has been hired
+                    //bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(customerID);
+                    //Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//todo: movie does not get returned after a movie has been hired
                     Console.ReadKey();
                     Console.Clear();
                     break;

@@ -19,7 +19,6 @@ namespace EFlib.BLL
                 .ToList();
             return rentedMovies;
         }
-
         /// <summary>
         /// return a list of all customers that have hired movie(s)
         /// </summary>
@@ -46,12 +45,13 @@ namespace EFlib.BLL
             }
             return rentalsDict;
         }
-
-        public static bool RemoveRentedMovie(int customerID)
+        public static bool RemoveRentedMovie(int rentedMovieID)
         {
             try
             {
-                _context.RentedMovies.Remove(ReturnRentedMovieForCustomerID(customerID));
+                _context.RentedMovies.Remove(_context.RentedMovies.Find(rentedMovieID));
+
+                //_context.RentedMovies.Remove(ReturnRentedMovieForCustomerID(customerID));
                 _context.Database.Log = Console.WriteLine;
                 _context.SaveChanges();
                 return true;
@@ -64,6 +64,41 @@ namespace EFlib.BLL
         private static RentedMovie ReturnRentedMovieForCustomerID(int customerID)
         {
             return _context.RentedMovies.FirstOrDefault(m => m.Customer.CustomerID==customerID);
+        }
+
+        /// <summary>
+        /// TODO: THIS METHOD IS TEMPORARY!
+        /// </summary>
+        /// <param name="customerThatsHiring"></param>
+        /// <param name="movieToBeHired"></param>
+        /// <returns></returns>
+        public static bool HireMovie(Customer customerThatsHiring, Movie movieToBeHired)
+        {
+            try
+            {
+                Customer c = _context.Customers.Find(customerThatsHiring.CustomerID);
+                Movie m = _context.Movies.Find(movieToBeHired.MovieId);
+
+                _context.RentedMovies.Add(new RentedMovie() { Customer = c, Movie = m, ReturnDate = new DateTime(2999, 01, 01) });
+                _context.Database.Log = Console.WriteLine;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
+        public static List<RentedMovie> GetRentedMovies()
+        {
+            //get all rented movies and include associated 
+            //data such as customer renting the movie and 
+            //the movie that is being rented
+            return _context.RentedMovies
+                .Include(c => c.Customer)
+                .Include(m => m.Movie)
+                .ToList();
         }
     }
 }
