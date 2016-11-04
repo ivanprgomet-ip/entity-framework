@@ -51,8 +51,9 @@ namespace ConsoleGUI
                     Console.ReadKey();
                     Console.Clear();
                     break;
-                case "4":
-                    //GET AVAILABLE MOVIES
+                case "4"://TODO: FIND OUT WHY THIS METHOD CREATES ANOTHER CUSTOMER
+                
+                    #region retrieve availabla movies to hire
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
                     foreach (var m in availableMovies)
@@ -65,8 +66,10 @@ namespace ConsoleGUI
 
                     Console.WriteLine(movieToBeHired.MovieName + " (" + movieToBeHired.Genre.GenreName + ") was choosen");
                     Console.WriteLine();
+                    #endregion
 
-                    //CHOOSE CUSTOMER WHO IS HIRING THE MOVIE
+                
+                    #region choose who will hire the movie
                     List<Customer> customers = BLLCustomer.ReturnAllCustomers();
                     foreach (var c in customers)
                     {
@@ -76,14 +79,17 @@ namespace ConsoleGUI
                     int customerThatsHiringID = int.Parse(Console.ReadLine());
                     Customer customerThatsHiring = BLLCustomer.ReturnCustomerWithID(customerThatsHiringID);
 
-                    //MAKE THE HIRE
+                    #endregion
+                 
+                    #region make the hire
                     RentedMovie newRentedMovie = new RentedMovie()
                     {
                         Customer = customerThatsHiring,
                         Movie = movieToBeHired,
                         ReturnDate = new DateTime(2999, 01, 01),
                     };
-                    BLLMovie.AddNewRentedMovie(newRentedMovie);
+                    BLLMovie.AddNewRentedMovie(newRentedMovie); 
+                    #endregion
 
                     Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName + ". Return date : " + newRentedMovie.ReturnDate.ToString());
                     Console.WriteLine();
@@ -179,7 +185,7 @@ namespace ConsoleGUI
             List<Customer> customers = BLLCustomer.ReturnAllCustomers();
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.CustomerName + " " + customer.CustomerAdress + " " + customer.CustomerPhone);
+                Console.WriteLine(customer.CustomerID+" "+customer.CustomerName + " " + customer.CustomerAdress + " " + customer.CustomerPhone);
             }
         }
 
