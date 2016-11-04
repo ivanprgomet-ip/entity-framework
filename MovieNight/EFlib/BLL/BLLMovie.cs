@@ -35,25 +35,33 @@ namespace EFlib.BLL
         /// return movies that are not rented, and thus currently available
         /// </summary>
         /// <returns></returns>
-        //public static List<Movie> ReturnAvailableMovies()
-        //{
-            //List<RentedMovie> unavailableMovies = BLLRentedMovie.ReturnAllRentedMovies();
-            //List<Movie> allMovies = ReturnAllMovies();
-            //List<Movie> availableMovies = new List<Movie>();
+        public static List<Movie> ReturnAvailableMovies()
+        {
+            List<Movie> notHiredMovies = ReturnAllMovies();
+            List<RentedMovie> hiredMovies = BLLRentedMovie.ReturnAllRentedMovies();
 
-            //for (int i = 0; i < allMovies.Count; i++)
-            //{
-            //    foreach (var unavailableMovie in unavailableMovies)
-            //    {
-            //            Movie currentRented = unavailableMovie.Movie;
+            for (int i = 0; i < notHiredMovies.Count; i++)
+            {
+                for (int j = 0; j < hiredMovies.Count; j++)
+                {
+                    if (notHiredMovies[i].MovieId == hiredMovies[j].Movie.MovieId)
+                    {
+                        notHiredMovies.Remove(notHiredMovies[i]);
+                        break;
+                    }
+                }
 
-            //            if(allMovies.Contains(currentRented))
-            //            {
-            //                allMovies.Remove(currentRented);
-            //            }
-            //    }
-            //}
-        //    return allMovies;
-        //}
+                //SOLVED WITH FOREACH ALSO..
+                //foreach (var unavailableMovie in hiredMovies)
+                //{
+                //    if (notHiredMovies[i].MovieId == unavailableMovie.Movie.MovieId)
+                //    {
+                //        notHiredMovies.Remove(notHiredMovies[i]);
+                //        break;
+                //    }
+                //}
+            }
+            return notHiredMovies;
+        }
     }
 }

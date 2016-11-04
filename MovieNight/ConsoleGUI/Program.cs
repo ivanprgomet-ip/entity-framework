@@ -61,13 +61,14 @@ namespace ConsoleGUI
                     break;
                 case "4":
 
-                    //List<Movie>availableMovies = BLLMovie.ReturnAvailableMovies();
-                    //foreach (var m in availableMovies)
-                    //{
-                    //    Console.WriteLine(m.MovieId+" "+m.MovieName);
-                    //}
-                    //Console.WriteLine("Choose which movie to hire >> ");
-                    //int MovieToBeHired = int.Parse(Console.ReadLine());
+                    List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
+                    Console.WriteLine("Currently available movies: ");
+                    foreach (var m in availableMovies)
+                    {
+                        Console.WriteLine(m.MovieId + " " + m.MovieName);
+                    }
+                    Console.WriteLine("Choose which movie to hire >> ");
+                    int MovieToBeHired = int.Parse(Console.ReadLine());
 
 
                     //List<Customer> customers =  BLLCustomer.ReturnAllCustomers();
@@ -87,6 +88,8 @@ namespace ConsoleGUI
                     Console.Clear();
                     break;
                 case "5":
+                    //return movie
+
                     //get all people that have hired a movie
                     //choose one of the persons 
                     //show all moves hired by the person chosen
