@@ -27,9 +27,7 @@ namespace EFlib.BLL
         public static Dictionary<Customer, List<Movie>> ReturnCustomersWithHiredMovies()
         {
             List<RentedMovie> rentals = ReturnAllRentedMovies();
-
             Dictionary<Customer, List<Movie>> rentalsDict = new Dictionary<Customer, List<Movie>>();
-
 
             foreach (var rentedMovie in rentals)
             {
@@ -42,19 +40,21 @@ namespace EFlib.BLL
                 }
                 else//else add the customer and also a list for the movie(s) the customer has hired
                 {
-                    currentCustomersMovies.Add(rentedMovie.Movie);//TODO: WHY IS THIS NULL?
+                    currentCustomersMovies.Add(rentedMovie.Movie);
                     rentalsDict.Add(rentedMovie.Customer, currentCustomersMovies);
                 }
             }
             return rentalsDict;
         }
 
-        public static bool RemoveMovieWithID(int returnMovieID)
+        public static bool RemoveRentedMovie(int customerID)
         {
             try
             {
-                //removes the movie with specific id and saves the changes
-                _context.RentedMovies.Remove(_context.RentedMovies.Find(returnMovieID));
+                //todo: movies that are hired at startup get removed from rented, but new movies that
+                //get hired during runtime, do not get removed 
+                    
+                _context.RentedMovies.Remove(_context.RentedMovies.Find(customerID));
                 _context.Database.Log = Console.WriteLine;
                 _context.SaveChanges();
                 return true;

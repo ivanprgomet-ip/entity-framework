@@ -52,8 +52,6 @@ namespace ConsoleGUI
                     Console.Clear();
                     break;
                 case "4":
-                    // TODO: DUPLICATE CUSTOMER BUG
-
                     //GET AVAILABLE MOVIES
                     List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
                     Console.WriteLine("Currently available movies: ");
@@ -107,12 +105,12 @@ namespace ConsoleGUI
                     }
 
                     Console.Write("Enter ID of customer instance that you want to return movie from >> ");
-                    int returnMovieID = int.Parse(Console.ReadLine());
+                    int customerID = int.Parse(Console.ReadLine());
 
                     //MAKE THE RETURN
                     //BLLRentedMovie.ReturnMovieWithID(returnMovieID);
-                    bool returnSuccessfull = BLLRentedMovie.RemoveMovieWithID(returnMovieID);
-                    Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//movie does not get returned
+                    bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(customerID);
+                    Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//todo: movie does not get returned after a movie has been hired
                     Console.ReadKey();
                     Console.Clear();
                     break;
