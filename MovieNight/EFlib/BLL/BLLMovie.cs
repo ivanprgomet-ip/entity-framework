@@ -32,16 +32,14 @@ namespace EFlib.BLL
         }
 
         /// <summary>
-        /// return movies that are not rented, and thus currently available
+        /// returns a list of all currently available movies to be hired
         /// </summary>
         /// <returns></returns>
         public static List<Movie> ReturnAvailableMovies()
         {
-            //TODO: IT SHOULD NOT PLACE MOVIES THAT ARE RENTED IN THE AVAILABLE MOVIES LIST
             List<Movie> availableMovies = ReturnAllMovies();
             List<RentedMovie> hiredMovies = BLLRentedMovie.ReturnAllRentedMovies();
             List<int> movieIDsToBeRemoved = new List<int>();
-
 
             for (int i = 0; i < availableMovies.Count; i++)
             {
@@ -83,19 +81,6 @@ namespace EFlib.BLL
             } 
             #endregion
             return availableMovies;
-        }
-
-        private static Movie ConvertToMovie(RentedMovie rentedMovie)
-        {
-            Movie movie = new Movie()
-            {
-                Genre = rentedMovie.Movie.Genre,
-                MovieDirector = rentedMovie.Movie.MovieDirector,
-                MovieName = rentedMovie.Movie.MovieName,
-                MovieReleaseDate = rentedMovie.Movie.MovieReleaseDate,
-                MovieId = rentedMovie.Movie.MovieId
-            };
-            return movie;
         }
 
         /// <summary>
