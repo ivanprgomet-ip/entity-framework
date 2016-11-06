@@ -69,7 +69,7 @@ namespace EFlib
             ctx.Movies.AddRange(new HashSet<Movie>() { m1, m2, m3, m4, m5 });
             ctx.RentedMovies.AddRange(new HashSet<RentedMovie> { rm1, rm2 });
 
-            //ctx.Database.Log = Console.WriteLine;
+            ctx.Database.Log = Console.WriteLine;
             ctx.SaveChanges();
         }
     }

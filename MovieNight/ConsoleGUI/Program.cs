@@ -9,7 +9,6 @@ using EFlib.BLL;
 
 namespace ConsoleGUI
 {
-    //TODO: FOR SOME REASON MOVIES THAT ARE HIRED AT INITIALIZE ARE THEN AVAILABLE FOR HIRE AT RUNTIME
     class Program
     {
         static void Main(string[] args)
@@ -53,7 +52,7 @@ namespace ConsoleGUI
                     break;
                 case "4":
                     #region retrieve availabla movies to hire
-                    List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
+                    List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();//TODO: returning movies that should not be available
                     Console.WriteLine("Currently available movies: ");
                     foreach (var m in availableMovies)
                     {

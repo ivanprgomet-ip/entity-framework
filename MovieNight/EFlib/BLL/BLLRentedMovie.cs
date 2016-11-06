@@ -83,6 +83,7 @@ namespace EFlib.BLL
                 Movie m = _context.Movies.Find(movieToBeHired.MovieId);
 
                 _context.RentedMovies.Add(new RentedMovie() { Customer = c, Movie = m, ReturnDate = new DateTime(2999, 01, 01) });
+                //todo: do something more here?
                 _context.Database.Log = Console.WriteLine;
                 _context.SaveChanges();
                 return true;
