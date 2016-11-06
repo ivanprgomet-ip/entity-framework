@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lab6._1
 {
-    class Course
+    public class Course
     {
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public int Credits { get; set; }
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab6._1
 {
-    class Enrollment
+    public class Enrollment
     {
         public int EnrollmentID { get; set; }
         public string EnrollmentName { get; set; }
@@ -16,7 +16,8 @@ namespace Lab6._1
 
         public Enrollment()
         {
-            Course = new Course();
+            //Course = new Course();
+            // = inizializes the course when including it, and thus nulls (0) data
         }
     }
 }
