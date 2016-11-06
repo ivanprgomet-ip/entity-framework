@@ -19,6 +19,7 @@ namespace EFlib.BLL
                 .ToList();
             return rentedMovies;
         }
+
         /// <summary>
         /// return a list of all customers that have hired movie(s)
         /// </summary>
@@ -45,6 +46,7 @@ namespace EFlib.BLL
             }
             return rentalsDict;
         }
+
         public static bool RemoveRentedMovie(int rentedMovieID)
         {
             try
@@ -61,6 +63,7 @@ namespace EFlib.BLL
                 return false;
             }
         }
+
         private static RentedMovie ReturnRentedMovieForCustomerID(int customerID)
         {
             return _context.RentedMovies.FirstOrDefault(m => m.Customer.CustomerID==customerID);

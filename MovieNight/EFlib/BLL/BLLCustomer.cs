@@ -10,7 +10,6 @@ namespace EFlib.BLL
     {
         static MovieRentalContext _context = new MovieRentalContext();
 
-
         public static bool RegisterNewCustomer(Customer newCustomer)
         {
             try
@@ -25,7 +24,6 @@ namespace EFlib.BLL
                 return false;
             }
         }
-
 
         public static List<Customer> ReturnAllCustomers()
         {

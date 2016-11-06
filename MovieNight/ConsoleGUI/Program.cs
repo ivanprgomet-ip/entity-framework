@@ -9,6 +9,7 @@ using EFlib.BLL;
 
 namespace ConsoleGUI
 {
+    //TODO: FOR SOME REASON MOVIES THAT ARE HIRED AT INITIALIZE ARE THEN AVAILABLE FOR HIRE AT RUNTIME
     class Program
     {
         static void Main(string[] args)
@@ -20,7 +21,6 @@ namespace ConsoleGUI
             {
                 Run();
             }
-
         }
 
         public static void Run()
@@ -80,24 +80,11 @@ namespace ConsoleGUI
 
                     BLLRentedMovie.HireMovie(customerThatsHiring, movieToBeHired);
 
-                    //#region make the hire
-                    //RentedMovie newRentedMovie = new RentedMovie()
-                    //{
-                    //    Customer = customerThatsHiring,
-                    //    Movie = movieToBeHired,
-                    //    ReturnDate = new DateTime(2999, 01, 01),
-                    //};
-                    //BLLMovie.AddNewRentedMovie(newRentedMovie);
-                    //#endregion
-
-                    //Console.WriteLine(customerThatsHiring.CustomerName + " hired " + movieToBeHired.MovieName + ". Return date : " + newRentedMovie.ReturnDate.ToString());
                     Console.WriteLine();
                     Console.ReadKey();
                     Console.Clear();
                     break;
                 case "5":
-                    //return movie
-
                     List<RentedMovie> rentals = BLLRentedMovie.GetRentedMovies();//todo: 
                     foreach (var rental in rentals)
                     {
@@ -105,24 +92,8 @@ namespace ConsoleGUI
                     }
                     Console.Write("Which movie do you wish to return? >> ");
                     int rentIDToReturn = int.Parse(Console.ReadLine());
-                    BLLRentedMovie.RemoveRentedMovie(rentIDToReturn);
-
-                    //Dictionary<Customer, List<Movie>> rentalsDict = BLLRentedMovie.ReturnCustomersWithHiredMovies();
-                    //foreach (KeyValuePair<Customer, List<Movie>> kvp in rentalsDict)
-                    //{
-                    //    Console.WriteLine("..................");
-                    //    Console.WriteLine(kvp.Key.CustomerID + " " + kvp.Key.CustomerName);
-                    //    foreach (var movie in kvp.Value)
-                    //    {
-                    //        Console.WriteLine("* " + movie.MovieName);
-                    //    }
-                    //}
-                    //Console.Write("Enter ID of customer instance that you want to return movie from >> ");
-                    //int customerID = int.Parse(Console.ReadLine());
-
-                    //RETURN MOVIE
-                    //bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(customerID);
-                    //Console.WriteLine(returnSuccessfull ? "movie successfully returned" : "movie was not returned");//todo: movie does not get returned after a movie has been hired
+                    bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(rentIDToReturn);
+                    Console.WriteLine(returnSuccessfull?"movie returned successfully":"movie was not returned");
                     Console.ReadKey();
                     Console.Clear();
                     break;
