@@ -11,6 +11,7 @@ namespace ConsoleGUI
 {
     class Program
     {
+        static bool userQuit = false;
         static void Main(string[] args)
         {
 
@@ -19,6 +20,8 @@ namespace ConsoleGUI
             while (true)
             {
                 Run();
+                if (userQuit)
+                    break;
             }
         }
 
@@ -30,6 +33,7 @@ namespace ConsoleGUI
             Console.WriteLine("4. Hire Movie");
             Console.WriteLine("5. Return Movie");
             Console.WriteLine("6. Register New Movie");
+            Console.WriteLine("e. Exit application");
             string choice = Console.ReadLine();
 
             switch (choice)
@@ -99,8 +103,15 @@ namespace ConsoleGUI
                 case "6":
                     RegisterNewMovie();
                     break;
+                case "e":
+                    userQuit = true;
+                    Console.Clear();
+                    Console.WriteLine("Goodbye...");
+                    break;
                 default:
-                    Console.WriteLine("App is closing...");
+                    Console.WriteLine("Please enter a valid command");
+                    Console.ReadKey();
+                    Console.Clear();
                     break;
             }
         }
@@ -139,7 +150,7 @@ namespace ConsoleGUI
             Console.WriteLine();
             foreach (var rentedMovie in rentedMovies)
             {
-                Console.WriteLine($"{rentedMovie.Movie.MovieName.ToUpper()} is currently with {rentedMovie.Customer.CustomerName.ToUpper()}");
+                Console.WriteLine($"{rentedMovie.Movie.MovieName.ToUpper()} is currently with {rentedMovie.Customer.CustomerName.ToUpper()} \nLast day of return: {rentedMovie.ReturnDate.ToString("dd.MM.yyyy")}");
                 Console.WriteLine();
             }
             Console.WriteLine("...............");
@@ -168,6 +179,7 @@ namespace ConsoleGUI
 
         private static void CheckForLateMovies()
         {
+            //TODO: THIS
             throw new NotImplementedException();
         }
     }

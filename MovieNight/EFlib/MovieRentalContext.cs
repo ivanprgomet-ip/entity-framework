@@ -39,7 +39,8 @@ namespace EFlib
         /// <param name="ctx"></param>
         private void Seed(MovieRentalContext ctx)
         {
-            DateTime oneWeekFromNow = new DateTime().AddDays(7);
+            //TODO: IMPLEMENT THE ONE WEEK TO THE RETURN DATE PROPERTY OF THE RENTED MOVIES
+            DateTime oneWeekFromNow = DateTime.Now.AddDays(7);
 
             //initialize database with some default data
             Genre g1 = new Genre() { GenreName = "Action" };
@@ -61,8 +62,8 @@ namespace EFlib
             Customer c2 = new Customer() { CustomerName = "Jason Bourne", CustomerAdress = "Fifth Avenue", CustomerPhone = "00922039212" };
             Customer c3 = new Customer() { CustomerName = "Cindy Lauper", CustomerAdress = "Dilinger Street 4", CustomerPhone = "00922772212" };
 
-            RentedMovie rm1 = new RentedMovie() { Customer = c1, Movie = m2, ReturnDate = new DateTime(2020, 03, 12) };
-            RentedMovie rm2 = new RentedMovie() { Customer = c2, Movie = m5, ReturnDate = new DateTime(2020, 03, 12) };
+            RentedMovie rm1 = new RentedMovie() { Customer = c1, Movie = m2, ReturnDate = oneWeekFromNow };
+            RentedMovie rm2 = new RentedMovie() { Customer = c2, Movie = m5, ReturnDate = oneWeekFromNow };
 
             ctx.Customers.AddRange(new HashSet<Customer>() { c1, c2, c3 });
             ctx.Genres.AddRange(new HashSet<Genre>() { g1, g2, g3, g4, g5, g6, g7 });
