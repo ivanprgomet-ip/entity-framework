@@ -23,25 +23,28 @@ namespace WebGUI.pages
                 sb.Append(string.Format($"<li>{m.MovieId}<br/>Title: {m.MovieName} <br/>Director: {m.MovieDirector} <br/>Genre: {m.Genre.GenreName} </li>"));
                 sb.Append("<br/><br/>");
 
-                //POPULATE MOVIE DROPLIST WITH DATA
-                ListItem currentMovie = new ListItem(m.MovieName, m.MovieId.ToString(), true);
-                dropdown_movieids.Items.Add(currentMovie);
+                PopulateMovieDroplist(m);
             };
+            PopulateCustomerDroplist();
 
-            //POPULATE CUSTOMER DROPLIST WITH DATA
+            sb.Append("</ul>");
+            sb.Append("<br/><br/>");
+            availablemoviesID.InnerHtml = sb.ToString();
+        }
+
+        private void PopulateCustomerDroplist()
+        {
             List<Customer> customers = BLLCustomer.ReturnAllCustomers();
             foreach (var c in customers)
             {
                 ListItem currentCustomer = new ListItem(c.CustomerName, c.CustomerID.ToString());
                 dropdown_customerids.Items.Add(currentCustomer);
             }
-
-            sb.Append("</ul>");
-            sb.Append("<br/><br/>");
-            availablemoviesID.InnerHtml = sb.ToString();
-
-            
-
+        }
+        private void PopulateMovieDroplist(Movie m)
+        {
+            ListItem currentMovie = new ListItem(m.MovieName, m.MovieId.ToString(), true);
+            dropdown_movieids.Items.Add(currentMovie);
         }
 
         protected void btnsubmit_Click(object sender, EventArgs e)
