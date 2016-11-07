@@ -106,8 +106,14 @@ namespace EFlib.BLL
 
         public static string CheckForLateMovies()
         {
-                //TODO: CHECK FOR LATE MOVIE RETURN DATES HERE
-                return DateTime.Now.ToString();
+            //TODO: CHECK FOR LATE MOVIE RETURN DATES HERE
+            List<RentedMovie> allRentedMovies = GetRentedMovies();
+            foreach (var rentedMovie in allRentedMovies)
+            {
+                if (rentedMovie.ReturnDate < DateTime.Now)
+                    return rentedMovie.Movie.MovieName + " is late!";
+            }
+            return string.Format("Update made " + DateTime.Now.ToString());
         }
     }
 }

@@ -17,21 +17,19 @@ namespace ConsoleGUI
         static void Main(string[] args)
         {
 
-            //CheckForLateMovies = new System.Threading.Thread(
-            //    delegate ()
-            //    {
-            //        while (true)
-            //        {
-            //            System.Threading.Thread.Sleep(1000);
-            //            Console.ForegroundColor = ConsoleColor.Magenta;
-            //            Console.WriteLine(BLLRentedMovie.CheckForLateMovies());
-            //            Console.ResetColor();
-            //        }
-            //    });
+            CheckForLateMovies = new System.Threading.Thread(delegate ()
+                {
+                    while (true)
+                    {
+                        System.Threading.Thread.Sleep(10000);
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        BLLRentedMovie.CheckForLateMovies();
+                        Console.ResetColor();
+                    }
+                });
             //CheckForLateMovies.Start();
 
-            System.Threading.Thread Main = new System.Threading.Thread(
-                delegate ()
+            System.Threading.Thread Main = new System.Threading.Thread(delegate ()
                 {
                     while (true)
                     {
