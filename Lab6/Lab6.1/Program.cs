@@ -12,8 +12,12 @@ namespace Lab6._1
         public static EducationalContext _context = new EducationalContext();
         static void Main(string[] args)
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<EducationalContext>());
+            GenerateStudents();
+
             using (EducationalContext context = new EducationalContext())
             {
+
                 context.Configuration.LazyLoadingEnabled = false;//disable lazy loading
                 Console.WriteLine("We are making an explicit loading");//print line 
 
@@ -32,6 +36,7 @@ namespace Lab6._1
             Course EntityFrameworkCourse = new Course() { CourseName = "Entity Framework", Credits = 50 };
             Course DotNetFrameworkCourse = new Course() { CourseName = ".NET Framework", Credits = 50 };
             Course JavascriptCourse = new Course() { CourseName = "Javascript", Credits = 50 };
+            Course BasicAlgorithms = new Course() { CourseName = "Basic Algorithms", Credits = 50 };
 
             Course HttpCourse = new Course() { CourseName = "Http", Credits = 100 };
             Course SecurityManagementCourse = new Course() { CourseName = "Security Management", Credits = 50 };
@@ -54,6 +59,11 @@ namespace Lab6._1
                     EnrollmentName ="Webdeveloper within .NET",
                     Course = JavascriptCourse,
                     Grade ="A-F" },
+                new Enrollment()
+                {
+                   EnrollmentName ="Webdeveloper within .NET",
+                   Course=BasicAlgorithms,
+                   Grade="A,F"},
             };
             Student student2 = new Student() { FirstMidName = "Lea", LastName = "Winchester", EnrollmentDate = new DateTime(2015, 12, 24) };
             student2.Enrollments = new List<Enrollment>

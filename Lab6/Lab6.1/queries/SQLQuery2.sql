@@ -1,6 +1,8 @@
-﻿select * from Enrollments
+﻿use EducationRegistryDB
+select * from Enrollments
 select * from Students
 select * from Courses
+use ASPNETDemoDB
 
 delete from Enrollments
 where EnrollmentID>0
