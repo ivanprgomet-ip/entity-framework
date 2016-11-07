@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <h2>All Movies: </h2>
         <asp:DropDownList ID="dropdown_movielists" runat="server" AutoPostBack="True">
             <asp:ListItem Value="all">All</asp:ListItem>
             <asp:ListItem Value="available">Available</asp:ListItem>

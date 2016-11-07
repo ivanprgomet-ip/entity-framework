@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <h2>Hire a Movie: </h2>
             <article id="availablemoviesID" runat="server">
             </article>
 

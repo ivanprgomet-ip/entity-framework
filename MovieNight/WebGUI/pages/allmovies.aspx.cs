@@ -33,8 +33,6 @@ namespace WebGUI.pages
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("All Movies:");
-            sb.Append("<br/><br/>");
             sb.Append("..............................");
             sb.Append("<br/><br/>");
             foreach (var movie in movies)

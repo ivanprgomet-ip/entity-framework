@@ -15,8 +15,7 @@ namespace WebGUI.pages
             List<Movie> availableMovies = BLLMovie.ReturnAvailableMovies();
             StringBuilder sb = new StringBuilder();
 
-            //availablemoviesID.InnerHtml =
-            sb.Append("Choose a Movie to Hire: <br/><br>");
+
             sb.Append("<ul>");
             foreach (var m in availableMovies)
             {
@@ -25,6 +24,7 @@ namespace WebGUI.pages
 
                 PopulateMovieDroplist(m);
             };
+
             PopulateCustomerDroplist();
 
             sb.Append("</ul>");

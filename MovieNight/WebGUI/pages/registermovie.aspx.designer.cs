@@ -22,6 +22,15 @@ namespace WebGUI.pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// lbl_movietitleID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_movietitleID;
+        
+        /// <summary>
         /// txt_movietitleID control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace WebGUI.pages {
         protected global::System.Web.UI.WebControls.TextBox txt_movietitleID;
         
         /// <summary>
+        /// lbl_moviedirectorID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_moviedirectorID;
+        
+        /// <summary>
         /// txt_moviedirectorID control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace WebGUI.pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_moviedirectorID;
+        
+        /// <summary>
+        /// lbl_dropdowngenre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_dropdowngenre;
         
         /// <summary>
         /// dropdown_moviegenre control.
