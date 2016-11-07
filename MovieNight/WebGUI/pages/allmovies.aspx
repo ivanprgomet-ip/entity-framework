@@ -9,9 +9,16 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:DropDownList ID="dropdown_movielists" runat="server" AutoPostBack="True">
+            <asp:ListItem Value="all">All</asp:ListItem>
+            <asp:ListItem Value="available">Available</asp:ListItem>
+            <asp:ListItem Value="unavailable">Unavailable</asp:ListItem>
+        </asp:DropDownList>
+
         <article id="movieslisted" runat="server">
 
         </article>
+
         <br />
         <br />
         <a href="../index.html">return to main menu</a>

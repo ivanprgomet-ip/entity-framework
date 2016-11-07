@@ -22,6 +22,15 @@ namespace WebGUI.pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// dropdown_movielists control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropdown_movielists;
+        
+        /// <summary>
         /// movieslisted control.
         /// </summary>
         /// <remarks>
