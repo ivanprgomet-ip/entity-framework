@@ -103,5 +103,11 @@ namespace EFlib.BLL
                 .Include(m => m.Movie)
                 .ToList();
         }
+
+        public static string CheckForLateMovies()
+        {
+                //TODO: CHECK FOR LATE MOVIE RETURN DATES HERE
+                return DateTime.Now.ToString();
+        }
     }
 }

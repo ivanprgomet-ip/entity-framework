@@ -12,17 +12,35 @@ namespace ConsoleGUI
     class Program
     {
         static bool userQuit = false;
+        static System.Threading.Thread CheckForLateMovies;
+
         static void Main(string[] args)
         {
 
-            //MovieRentalContext ctx = new MovieRentalContext();
+            //CheckForLateMovies = new System.Threading.Thread(
+            //    delegate ()
+            //    {
+            //        while (true)
+            //        {
+            //            System.Threading.Thread.Sleep(1000);
+            //            Console.ForegroundColor = ConsoleColor.Magenta;
+            //            Console.WriteLine(BLLRentedMovie.CheckForLateMovies());
+            //            Console.ResetColor();
+            //        }
+            //    });
+            //CheckForLateMovies.Start();
 
-            while (true)
-            {
-                Run();
-                if (userQuit)
-                    break;
-            }
+            System.Threading.Thread Main = new System.Threading.Thread(
+                delegate ()
+                {
+                    while (true)
+                    {
+                        Run();
+                        if (userQuit)
+                            break;
+                    }
+                });
+            Main.Start();
         }
 
         public static void Run()
@@ -91,12 +109,12 @@ namespace ConsoleGUI
                     List<RentedMovie> rentals = BLLRentedMovie.GetRentedMovies();//todo: 
                     foreach (var rental in rentals)
                     {
-                        Console.WriteLine(rental.RentedID+" "+rental.Movie.MovieName+" HIRED BY: "+rental.Customer.CustomerName);
+                        Console.WriteLine(rental.RentedID + " " + rental.Movie.MovieName + " HIRED BY: " + rental.Customer.CustomerName);
                     }
                     Console.Write("Which movie do you wish to return? >> ");
                     int rentIDToReturn = int.Parse(Console.ReadLine());
                     bool returnSuccessfull = BLLRentedMovie.RemoveRentedMovie(rentIDToReturn);
-                    Console.WriteLine(returnSuccessfull?"movie returned successfully":"movie was not returned");
+                    Console.WriteLine(returnSuccessfull ? "movie returned successfully" : "movie was not returned");
                     Console.ReadKey();
                     Console.Clear();
                     break;
@@ -173,14 +191,9 @@ namespace ConsoleGUI
             List<Customer> customers = BLLCustomer.ReturnAllCustomers();
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.CustomerID+" "+customer.CustomerName + " " + customer.CustomerAdress + " " + customer.CustomerPhone);
+                Console.WriteLine(customer.CustomerID + " " + customer.CustomerName + " " + customer.CustomerAdress + " " + customer.CustomerPhone);
             }
         }
 
-        private static void CheckForLateMovies()
-        {
-            //TODO: THIS
-            throw new NotImplementedException();
-        }
     }
 }
