@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="pages\allcustomers.aspx" />
     <Content Include="pages\allmovies.aspx" />
     <Content Include="pages\registermovie.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -122,6 +123,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pages\allcustomers.aspx.cs">
+      <DependentUpon>allcustomers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\allcustomers.aspx.designer.cs">
+      <DependentUpon>allcustomers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\allmovies.aspx.cs">
       <DependentUpon>allmovies.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
