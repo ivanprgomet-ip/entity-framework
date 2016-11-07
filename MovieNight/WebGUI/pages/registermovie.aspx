@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="registermovie_form">
+    <div class="registerform">
         <asp:TextBox ID="txt_movietitleID" runat="server"></asp:TextBox>
         <asp:TextBox ID="txt_moviedirectorID" runat="server"></asp:TextBox>
         <asp:DropDownList ID="dropdown_moviegenre" runat="server">
