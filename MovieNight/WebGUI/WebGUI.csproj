@@ -117,6 +117,7 @@
     <Content Include="index.html" />
     <Content Include="pages\allcustomers.aspx" />
     <Content Include="pages\allmovies.aspx" />
+    <Content Include="pages\hiremovie.aspx" />
     <Content Include="pages\registercustomer.aspx" />
     <Content Include="pages\registermovie.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="pages\allmovies.aspx.designer.cs">
       <DependentUpon>allmovies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\hiremovie.aspx.cs">
+      <DependentUpon>hiremovie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\hiremovie.aspx.designer.cs">
+      <DependentUpon>hiremovie.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\registercustomer.aspx.cs">
       <DependentUpon>registercustomer.aspx</DependentUpon>
