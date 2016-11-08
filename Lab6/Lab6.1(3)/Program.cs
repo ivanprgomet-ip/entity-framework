@@ -24,6 +24,7 @@ namespace Lab6._1_3_
                     {
                         Console.WriteLine("\t"+enrollment.EnrollmentID+"# "+ enrollment.EnrollmentName+" "+enrollment.Grade);
                         Console.WriteLine("\t"+enrollment.Course.CourseID+" "+ enrollment.Course.CourseName+" ("+enrollment.Course.Credits+"p) ");//todo: not working
+                        Console.WriteLine();
                     }
 
                     Console.WriteLine("......................");
