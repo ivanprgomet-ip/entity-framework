@@ -29,6 +29,7 @@ namespace Lab6._1
 
                 Console.WriteLine("Search for a student (entry). Enter firstname >> ");//search for specific student using entry and Load method
                 SearchStudentWithEntry(Console.ReadLine(), context);
+
             }
         }
         public static void GenerateStudents()
