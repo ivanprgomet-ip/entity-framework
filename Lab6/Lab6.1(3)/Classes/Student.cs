@@ -16,7 +16,7 @@ namespace Lab6._1_3_
 
         public Student()
         {
-
+            //Enrollments = new HashSet<Enrollment>();
         }
         public Student(string lastname, string firstmidname, DateTime enrollmentdate)
         {

@@ -14,24 +14,71 @@ namespace Lab6._1_3_
             Database.SetInitializer(new DropCreateDatabaseAlways<EducationContext>());
             GenerateStudents();
 
+            #region explanation 01
+            /*
+                the code below doesnt have any include methods or entry loads. 
+                to work, the code below requires lazy loading. this means set the 
+                navigation properties in the relevant classes to virtual. when they are
+                virtual, you should also not have any initialization of code in the constructors.
+                If you dont have the navigation properties set to virtual, and you have the 
+                navigation properties initialized in the constructor, the code will not chrash, 
+                but it also wont display any data.
+
+                setting the lazyloadingenabled property to false is just another way of 
+                removing all the virtual keyword from the navigation properties in the classes.
+                it will crash. but if you have lazyloadingenabled property to false, and the 
+                navigation properties to virtual, one way to avoid a crash is to also initialize the
+                properties in the constructor, which will dodge the nullreference exception.
+            */
+            #endregion
+            #region code 01
+            //using (EducationContext context = new EducationContext())
+            //{
+            //    //context.Configuration.LazyLoadingEnabled = false;
+
+            //    foreach (var student in context.Students)
+            //    {
+            //        Console.WriteLine(student.FirstMidName + " " + student.LastName + "\nEnrolled to: ");
+
+            //        foreach (var enrollment in student.Enrollments)
+            //        {
+            //            Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade);
+            //            Console.WriteLine("\t" + enrollment.Course.CourseID + ": " + enrollment.Course.CourseName + " (" + enrollment.Course.Credits + "p) ");
+            //            Console.WriteLine();
+            //        }
+
+            //        Console.WriteLine("......................");
+            //        Console.WriteLine();
+            //    }
+            //} 
+            #endregion
+
+            #region explanation 02
+            /*
+                   the code below has got includes for all the associated data for a student, so in the classes, no 
+                   virtual keyword is required for the navigation properties. No initialization is required neither, but wont
+                   make any diference if you initialize the navigation properties in the constructor. 
+               */
+            #endregion
+            #region code 02
             using (EducationContext context = new EducationContext())
             {
-                foreach (var student in context.Students.Include(e => e.Enrollments.Select(c=>c.Course)).ToList())
+                foreach (var student in context.Students.Include(e => e.Enrollments.Select(c => c.Course)).ToList())
                 {
                     Console.WriteLine(student.FirstMidName + " " + student.LastName + "\nEnrolled to: ");
 
                     foreach (var enrollment in student.Enrollments)
                     {
-                        Console.WriteLine("\t"+enrollment.EnrollmentID+"# "+ enrollment.EnrollmentName+" "+enrollment.Grade);
-                        Console.WriteLine("\t"+enrollment.Course.CourseID+" "+ enrollment.Course.CourseName+" ("+enrollment.Course.Credits+"p) ");//todo: not working
+                        Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade);
+                        Console.WriteLine("\t" + enrollment.Course.CourseID + ": " + enrollment.Course.CourseName + " (" + enrollment.Course.Credits + "p) ");
                         Console.WriteLine();
                     }
 
                     Console.WriteLine("......................");
                     Console.WriteLine();
                 }
-            }
-            Console.ResetColor();
+            } 
+            #endregion
         }
         public static void GenerateStudents()
         {
@@ -45,7 +92,7 @@ namespace Lab6._1_3_
 
             Enrollment LWEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398lw", Grade = "A-F" };
             Enrollment LWNET01 = new Enrollment() { Course = course2, EnrollmentName = "NET294lw", Grade = "A-F" };
-            Enrollment LWJS01= new Enrollment() { Course = course3, EnrollmentName = "JS233lw", Grade = "A-F" };
+            Enrollment LWJS01 = new Enrollment() { Course = course3, EnrollmentName = "JS233lw", Grade = "A-F" };
             Enrollment LWBA01 = new Enrollment() { Course = course4, EnrollmentName = "BA23864lw", Grade = "A-F" };
 
             Enrollment IPEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398ip", Grade = "A-F" };
