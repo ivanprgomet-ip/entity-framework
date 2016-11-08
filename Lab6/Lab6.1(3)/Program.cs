@@ -42,7 +42,7 @@ namespace Lab6._1_3_
 
             //        foreach (var enrollment in student.Enrollments)
             //        {
-            //            Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade);
+            //            Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade+" " +enrollment.status);
             //            Console.WriteLine("\t" + enrollment.Course.CourseID + ": " + enrollment.Course.CourseName + " (" + enrollment.Course.Credits + "p) ");
             //            Console.WriteLine();
             //        }
@@ -69,9 +69,11 @@ namespace Lab6._1_3_
 
                     foreach (var enrollment in student.Enrollments)
                     {
-                        Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade);
+                        Console.ForegroundColor = ReturnEnrollmentStatusColor(enrollment);
+                        Console.WriteLine("\t" + enrollment.EnrollmentID + ": " + enrollment.EnrollmentName + " " + enrollment.Grade +" " +enrollment.status);
                         Console.WriteLine("\t" + enrollment.Course.CourseID + ": " + enrollment.Course.CourseName + " (" + enrollment.Course.Credits + "p) ");
                         Console.WriteLine();
+                        Console.ResetColor();
                     }
 
                     Console.WriteLine("......................");
@@ -90,18 +92,18 @@ namespace Lab6._1_3_
             Course course5 = new Course() { CourseName = "Http", Credits = 100 };
             Course course6 = new Course() { CourseName = "Security Management", Credits = 50 };
 
-            Enrollment LWEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398lw", Grade = "A-F" };
-            Enrollment LWNET01 = new Enrollment() { Course = course2, EnrollmentName = "NET294lw", Grade = "A-F" };
-            Enrollment LWJS01 = new Enrollment() { Course = course3, EnrollmentName = "JS233lw", Grade = "A-F" };
-            Enrollment LWBA01 = new Enrollment() { Course = course4, EnrollmentName = "BA23864lw", Grade = "A-F" };
+            Enrollment LWEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398lw", Grade = "A-F",status=EnrollmentStatus.Approved };
+            Enrollment LWNET01 = new Enrollment() { Course = course2, EnrollmentName = "NET294lw", Grade = "A-F", status = EnrollmentStatus.Waiting };
+            Enrollment LWJS01 = new Enrollment() { Course = course3, EnrollmentName = "JS233lw", Grade = "A-F", status = EnrollmentStatus.Approved };
+            Enrollment LWBA01 = new Enrollment() { Course = course4, EnrollmentName = "BA23864lw", Grade = "A-F", status = EnrollmentStatus.Approved };
 
-            Enrollment IPEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398ip", Grade = "A-F" };
-            Enrollment IPNET01 = new Enrollment() { Course = course2, EnrollmentName = "NET294ip", Grade = "A-F" };
-            Enrollment IPJS01 = new Enrollment() { Course = course3, EnrollmentName = "JS233ip", Grade = "A-F" };
-            Enrollment IPBA01 = new Enrollment() { Course = course4, EnrollmentName = "BA23864ip", Grade = "A-F" };
+            Enrollment IPEF001 = new Enrollment() { Course = course1, EnrollmentName = "EF2398ip", Grade = "A-F", status = EnrollmentStatus.Waiting };
+            Enrollment IPNET01 = new Enrollment() { Course = course2, EnrollmentName = "NET294ip", Grade = "A-F", status = EnrollmentStatus.Waiting };
+            Enrollment IPJS01 = new Enrollment() { Course = course3, EnrollmentName = "JS233ip", Grade = "A-F", status = EnrollmentStatus.Waiting };
+            Enrollment IPBA01 = new Enrollment() { Course = course4, EnrollmentName = "BA23864ip", Grade = "A-F", status = EnrollmentStatus.Waiting };
 
-            Enrollment JBHP01 = new Enrollment() { Course = course5, EnrollmentName = "HP23864jb", Grade = "A-F" };
-            Enrollment JBSM01 = new Enrollment() { Course = course6, EnrollmentName = "SM23864jb", Grade = "A-F" };
+            Enrollment JBHP01 = new Enrollment() { Course = course5, EnrollmentName = "HP23864jb", Grade = "A-F", status = EnrollmentStatus.Approved};
+            Enrollment JBSM01 = new Enrollment() { Course = course6, EnrollmentName = "SM23864jb", Grade = "A-F", status = EnrollmentStatus.Approved };
 
             Student student1 = new Student()
             {
@@ -141,6 +143,20 @@ namespace Lab6._1_3_
                 context.Students.Add(student1);
                 context.Database.Log = Console.WriteLine;
                 context.SaveChanges();
+            }
+        }
+        public static ConsoleColor ReturnEnrollmentStatusColor(Enrollment enrollment)
+        {
+            switch (enrollment.status)
+            {
+                case EnrollmentStatus.Waiting:
+                    return ConsoleColor.Yellow;
+                case EnrollmentStatus.Neglected:
+                    return ConsoleColor.Red;
+                case EnrollmentStatus.Approved:
+                    return ConsoleColor.Green;
+                default:
+                    return ConsoleColor.DarkYellow;
             }
         }
     }
