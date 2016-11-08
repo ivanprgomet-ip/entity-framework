@@ -15,10 +15,12 @@ namespace Lab6._1_2_
             Database.SetInitializer(new DropCreateDatabaseAlways<EducationContext>());
             GenerateStudents();
 
-            //print all the students and their enrollments, and the corresponding courses
-            //we do not have the luxury of lazy loading in the classes (virtual on navigation properties)
-            //so we have to manually eagerly load using include
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            /*
+                print all the students and their enrollments, and the corresponding courses
+                we do not have the luxury of lazy loading in the classes (virtual on navigation properties)
+                so we have to manually eagerly load using include
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            */
             using (EducationContext context = new EducationContext())
             {
                 foreach (var student in context.Students
@@ -85,13 +87,9 @@ namespace Lab6._1_2_
 
             using (EducationContext context = new EducationContext())
             {
-                //context.Courses.AddRange(new List<Course>() { EntityFrameworkCourse, DotNetFrameworkCourse, JavascriptCourse, BasicAlgorithms, HttpCourse, SecurityManagementCourse });
-                //context.Enrollments.AddRange(new List<Enrollment>() { e1, e2 });
                 context.Students.AddRange(new List<Student> { student1, student2, student3 });
                 context.Database.Log = Console.WriteLine;
                 context.SaveChanges();
-
-                //detach, koppla loss entiteten från kontexten
             }
         }
     }
