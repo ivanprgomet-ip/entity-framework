@@ -13,8 +13,7 @@ namespace Lab6._1_2_
         public int EnrollmentID { get; set; }
         public string EnrollmentName { get; set; }
         public string Grade { get; set; }
-        public virtual ICollection<Course> Courses { get; set; }
-
+        public ICollection<Course> Courses { get; set; }
         public Enrollment()
         {
             //Courses = new HashSet<Course>();

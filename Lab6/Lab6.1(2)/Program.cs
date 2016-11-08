@@ -16,19 +16,28 @@ namespace Lab6._1_2_
             GenerateStudents();
 
             //print all the students and their enrollments, and the corresponding courses
+            //we do not have the luxury of lazy loading in the classes (virtual on navigation properties)
+            //so we have to manually eagerly load using include
+            Console.ForegroundColor = ConsoleColor.Cyan;
             using (EducationContext context = new EducationContext())
             {
-                foreach (var stud in context.Students)
+                foreach (var student in context.Students
+                    .Include(e => e.Enrollment)
+                    .Include(e => e.Enrollment.Courses)
+                    .ToList())
                 {
-                    Console.WriteLine(stud.FirstMidName);
-                    foreach (var course in stud.Enrollment.Courses)
+                    Console.WriteLine(student.FirstMidName+" "+student.LastName + "\nEnrolled to: " + student.Enrollment.EnrollmentName);
+                    foreach (var course in student.Enrollment.Courses)
                     {
-                        Console.WriteLine(course.CourseName);
+                        Console.WriteLine(course.CourseID + "# " + course.CourseName + " (" + course.Credits + "p) ");
                     }
                     Console.WriteLine("......................");
+                    Console.WriteLine();
                 }
             }
+            Console.ResetColor();
         }
+
         public static void GenerateStudents()
         {
             Course EntityFrameworkCourse = new Course() { CourseName = "Entity Framework", Credits = 50 };
@@ -76,12 +85,13 @@ namespace Lab6._1_2_
 
             using (EducationContext context = new EducationContext())
             {
-                
-                context.Students.Add(student1);
-                context.Students.Add(student2);
-                context.Students.Add(student3);
-                //context.Database.Log = Console.WriteLine;
+                //context.Courses.AddRange(new List<Course>() { EntityFrameworkCourse, DotNetFrameworkCourse, JavascriptCourse, BasicAlgorithms, HttpCourse, SecurityManagementCourse });
+                //context.Enrollments.AddRange(new List<Enrollment>() { e1, e2 });
+                context.Students.AddRange(new List<Student> { student1, student2, student3 });
+                context.Database.Log = Console.WriteLine;
                 context.SaveChanges();
+
+                //detach, koppla loss entiteten från kontexten
             }
         }
     }

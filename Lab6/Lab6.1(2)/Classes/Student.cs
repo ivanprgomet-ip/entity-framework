@@ -12,7 +12,7 @@ namespace Lab6._1_2_
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public virtual Enrollment Enrollment { get; set; }
+        public Enrollment Enrollment { get; set; }
 
         public Student()
         {
