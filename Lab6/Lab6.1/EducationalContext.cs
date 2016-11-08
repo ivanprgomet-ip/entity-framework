@@ -11,7 +11,7 @@ namespace Lab6._1
     {
         public EducationalContext() : base("name=EducationalContextCS")
         {
-
+           
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }

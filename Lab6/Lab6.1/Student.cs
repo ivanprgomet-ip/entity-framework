@@ -12,19 +12,18 @@ namespace Lab6._1
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public ICollection<Enrollment> Enrollments { get; set; }
 
         public Student()
         {
-            Enrollments = new List<Enrollment>();
+            //Enrollments = new List<Enrollment>();
         }
         public Student(string lastname, string firstmidname, DateTime enrollmentdate)
         {
             this.LastName = lastname;
             this.FirstMidName = firstmidname;
             this.EnrollmentDate = enrollmentdate;
-            this.Enrollments = new List<Enrollment>();
+            //this.Enrollments = new List<Enrollment>();
         }
-
     }
 }
